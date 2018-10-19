@@ -14,7 +14,6 @@ import javax.swing.JFormattedTextField;
 public class LoginMenu {
 
 	private JFrame frame;
-
 	/**
 	 * Launch the application.
 	 */
