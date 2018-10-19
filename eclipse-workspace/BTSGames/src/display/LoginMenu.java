@@ -19,6 +19,7 @@ public class LoginMenu extends JPanel {
 	public static LoginMenu getInstance() {
 		if (menu == null) {
 			menu = new LoginMenu();
+			Initialize();
 			return menu;
 		}
 		else {
@@ -26,24 +27,24 @@ public class LoginMenu extends JPanel {
 		}
 	}
 	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private LoginMenu() {
-		
-		panel.setLayout(null);
-		panel.setBounds(0, 0, 400, 400);
+	private static void Initialize() {
+		menu.setLayout(null);
+		menu.setBounds(0, 0, 400, 400);
 		
 		JLabel label = new JLabel("Select a Profile");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.BOLD, 50));
 		label.setBounds(10, 11, 380, 99);
-		panel.add(label);
+		menu.add(label);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBounds(100, 257, 200, 50);
-		panel.add(panel_1);
+		menu.add(panel_1);
 		
 		JButton button = new JButton("Select");
 		button.setBounds(115, 15, 75, 20);
@@ -56,7 +57,7 @@ public class LoginMenu extends JPanel {
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBounds(100, 121, 200, 125);
-		panel.add(panel_2);
+		menu.add(panel_2);
 		
 		JLabel label_1 = new JLabel("Top Scores:");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);

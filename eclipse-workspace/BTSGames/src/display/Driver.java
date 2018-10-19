@@ -46,6 +46,6 @@ public class Driver {
 		frame.getContentPane().setLayout(null);
 		
 		LoginMenu panel = LoginMenu.getInstance();
-		frame.getContentPane().add(panel.getPanel());
+		frame.getContentPane().add(panel);
 	}
 }
