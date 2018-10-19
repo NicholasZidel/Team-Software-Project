@@ -11,48 +11,28 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
-public class LoginMenu {
+public class LoginMenu extends JPanel {
 
-	private JFrame frame;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginMenu window = new LoginMenu();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private static LoginMenu menu = null;
+	private JPanel panel = new JPanel();
+	
+	public static LoginMenu getInstance() {
+		if (menu == null) {
+			menu = new LoginMenu();
+			return menu;
+		}
+		else {
+			return menu;
+		}
 	}
-
-	/**
-	 * Create the application.
-	 */
-	public LoginMenu() {
-		initialize();
-	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setMinimumSize(new Dimension(406, 429));
-		frame.setMaximumSize(new Dimension(406, 429));
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 352, 367);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	private LoginMenu() {
 		
-		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 400, 400);
-		frame.getContentPane().add(panel);
 		
 		JLabel label = new JLabel("Select a Profile");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,4 +83,8 @@ public class LoginMenu {
 		panel_2.add(label_4);
 	}
 
+	public JPanel getPanel() {
+		return panel;
+	}
+	
 }
