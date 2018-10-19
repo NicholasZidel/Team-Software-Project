@@ -14,7 +14,6 @@ import javax.swing.JFormattedTextField;
 public class LoginMenu extends JPanel {
 
 	private static LoginMenu menu = null;
-	private JPanel panel = new JPanel();
 	
 	public static LoginMenu getInstance() {
 		if (menu == null) {
@@ -83,9 +82,4 @@ public class LoginMenu extends JPanel {
 		label_4.setBounds(75, 95, 50, 15);
 		panel_2.add(label_4);
 	}
-
-	public JPanel getPanel() {
-		return panel;
-	}
-	
 }
