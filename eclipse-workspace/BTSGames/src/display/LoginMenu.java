@@ -85,11 +85,11 @@ public class LoginMenu {
 		label_1.setBounds(50, 10, 100, 25);
 		panel_2.add(label_1);
 		
-		JLabel label_2 = new JLabel("AAA");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_2.setBounds(75, 45, 50, 15);
-		panel_2.add(label_2);
+		JLabel lblBbb = new JLabel("BBB");
+		lblBbb.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBbb.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblBbb.setBounds(75, 45, 50, 15);
+		panel_2.add(lblBbb);
 		
 		JLabel label_3 = new JLabel("AAA");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
