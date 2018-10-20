@@ -7,11 +7,16 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
 public class LoginMenu extends JPanel {
+	public LoginMenu() {
+	}
 
 	private static LoginMenu menu = null;
 	
@@ -34,52 +39,57 @@ public class LoginMenu extends JPanel {
 		menu.setLayout(null);
 		menu.setBounds(0, 0, 400, 400);
 		
-		JLabel label = new JLabel("Select a Profile");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.BOLD, 50));
-		label.setBounds(10, 11, 380, 99);
-		menu.add(label);
+		JLabel title = new JLabel("Select a Profile");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setFont(new Font("Tahoma", Font.BOLD, 50));
+		title.setBounds(10, 11, 380, 99);
+		menu.add(title);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBounds(100, 257, 200, 50);
-		menu.add(panel_1);
+		JPanel loginPanel = new JPanel();
+		loginPanel.setLayout(null);
+		loginPanel.setBounds(100, 257, 200, 50);
+		menu.add(loginPanel);
 		
-		JButton button = new JButton("Select");
-		button.setBounds(115, 15, 75, 20);
-		panel_1.add(button);
+		JButton loginButton = new JButton("Select");
+		loginButton.setBounds(115, 15, 75, 20);
+		loginPanel.add(loginButton);
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menu.setVisible(false);
+			}
+		});
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(10, 15, 100, 20);
-		panel_1.add(formattedTextField);
+		JFormattedTextField textField = new JFormattedTextField();
+		textField.setBounds(10, 15, 100, 20);
+		loginPanel.add(textField);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBounds(100, 121, 200, 125);
-		menu.add(panel_2);
+		JPanel scoreBoardPanel = new JPanel();
+		scoreBoardPanel.setLayout(null);
+		scoreBoardPanel.setBounds(100, 121, 200, 125);
+		menu.add(scoreBoardPanel);
 		
-		JLabel label_1 = new JLabel("Top Scores:");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_1.setBounds(50, 10, 100, 25);
-		panel_2.add(label_1);
+		JLabel topScoreTitle = new JLabel("Top Scores:");
+		topScoreTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		topScoreTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		topScoreTitle.setBounds(50, 10, 100, 25);
+		scoreBoardPanel.add(topScoreTitle);
 		
-		JLabel lblBbb = new JLabel("BBB");
-		lblBbb.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBbb.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblBbb.setBounds(75, 45, 50, 15);
-		panel_2.add(lblBbb);
+		JLabel score1 = new JLabel("BBB");
+		score1.setHorizontalAlignment(SwingConstants.CENTER);
+		score1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		score1.setBounds(75, 45, 50, 15);
+		scoreBoardPanel.add(score1);
 		
-		JLabel label_3 = new JLabel("AAA");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_3.setBounds(75, 70, 50, 15);
-		panel_2.add(label_3);
+		JLabel score2 = new JLabel("AAA");
+		score2.setHorizontalAlignment(SwingConstants.CENTER);
+		score2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		score2.setBounds(75, 70, 50, 15);
+		scoreBoardPanel.add(score2);
 		
-		JLabel label_4 = new JLabel("AAA");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_4.setBounds(75, 95, 50, 15);
-		panel_2.add(label_4);
+		JLabel score3 = new JLabel("AAA");
+		score3.setHorizontalAlignment(SwingConstants.CENTER);
+		score3.setFont(new Font("Tahoma", Font.BOLD, 13));
+		score3.setBounds(75, 95, 50, 15);
+		scoreBoardPanel.add(score3);
 	}
 }
