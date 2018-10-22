@@ -32,7 +32,6 @@ public class GameMenu extends JPanel{
 	 * Create the application.
 	 */
 	public GameMenu() {
-		initialize();
 	}
 
 	/**
