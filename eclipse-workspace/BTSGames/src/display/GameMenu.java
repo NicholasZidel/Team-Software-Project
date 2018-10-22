@@ -44,27 +44,27 @@ public class GameMenu {
 
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JButton button = new JButton("<");
-		panel.add(button, BorderLayout.WEST);
+		JButton leftbutton = new JButton("<");
+		panel.add(leftbutton, BorderLayout.WEST);
 		
-		JButton button_1 = new JButton(">");
-		panel.add(button_1, BorderLayout.EAST);
+		JButton rightbutton = new JButton(">");
+		panel.add(rightbutton, BorderLayout.EAST);
 		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(null);
+		JPanel gamePanel = new JPanel();
+		panel.add(gamePanel, BorderLayout.CENTER);
+		gamePanel.setLayout(null);
 		
 		JLabel lblGameTitle = new JLabel("Game Title");
 		lblGameTitle.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		lblGameTitle.setBounds(77, 38, 159, 50);
-		panel_1.add(lblGameTitle);
+		gamePanel.add(lblGameTitle);
 		
 		JButton btnStart = new JButton("Start");
 		btnStart.setBounds(99, 188, 89, 23);
-		panel_1.add(btnStart);
+		gamePanel.add(btnStart);
 		
 		JButton btnTutorial = new JButton("Tutorial");
 		btnTutorial.setBounds(99, 235, 89, 23);
-		panel_1.add(btnTutorial);
+		gamePanel.add(btnTutorial);
 	}
 }
