@@ -56,6 +56,7 @@ public class LoginMenu extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				menu.setVisible(false);
+				//listen to this method call
 			}
 		});
 		

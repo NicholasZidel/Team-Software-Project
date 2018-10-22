@@ -37,7 +37,8 @@ public class Driver {
 	}
 	
 	private void initialize() {
-		LoginMenu panel = LoginMenu.getInstance();
+		LoginMenu LM = LoginMenu.getInstance();
+		MainMenu MM = MainMenu.getInstance();
 		frame = new JFrame();
 		frame.setMinimumSize(new Dimension(406, 429));
 		frame.setMaximumSize(new Dimension(406, 429));
@@ -45,6 +46,7 @@ public class Driver {
 		frame.setBounds(100, 100, 352, 367);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(panel);
+		frame.getContentPane().add(LM);
+		frame.getContentPane().add(MM);
 	}
 }
