@@ -14,22 +14,18 @@ import javax.swing.SwingConstants;
 
 public class GameMenu {
 
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameMenu window = new GameMenu();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private static GameMenu panel = null;
+	
+	public static GameMenu getInstance() {
+		
+		if (panel == null) {
+			panel = new GameMenu();
+			initialize();
+			return panel;
+		}
+		else {
+			return panel;
+		}
 	}
 
 	/**
@@ -42,32 +38,33 @@ public class GameMenu {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JButton button = new JButton("<");
-		frame.getContentPane().add(button, BorderLayout.WEST);
-		
-		JButton button_1 = new JButton(">");
-		frame.getContentPane().add(button_1, BorderLayout.EAST);
+	private static void initialize() {
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JButton button = new JButton("<");
+		panel.add(button, BorderLayout.WEST);
+		
+		JButton button_1 = new JButton(">");
+		panel.add(button_1, BorderLayout.EAST);
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(null);
 		
 		JLabel lblGameTitle = new JLabel("Game Title");
-		lblGameTitle.setBounds(82, 5, 187, 48);
-		lblGameTitle.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		panel.add(lblGameTitle);
+		lblGameTitle.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblGameTitle.setBounds(77, 38, 159, 50);
+		panel_1.add(lblGameTitle);
 		
-		JButton btnPlay = new JButton("Play");
-		btnPlay.setBounds(131, 135, 89, 23);
-		panel.add(btnPlay);
+		JButton btnStart = new JButton("Start");
+		btnStart.setBounds(99, 188, 89, 23);
+		panel_1.add(btnStart);
 		
-		JButton btnLeaderboard = new JButton("Tutorial");
-		btnLeaderboard.setBounds(131, 169, 89, 23);
-		panel.add(btnLeaderboard);
+		JButton btnTutorial = new JButton("Tutorial");
+		btnTutorial.setBounds(99, 235, 89, 23);
+		panel_1.add(btnTutorial);
 	}
 }
