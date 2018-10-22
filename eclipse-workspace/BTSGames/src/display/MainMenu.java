@@ -13,63 +13,49 @@ import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class MainMenu {
+public class MainMenu extends JPanel {
 
-	private JFrame frame;
-	private JLabel lblTitle;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainMenu window = new MainMenu();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private static MainMenu menu = null;
+	
+	public static MainMenu getInstance() {
+		if (menu == null) {
+			menu = new MainMenu();
+			initialize();
+			return menu;
+		}
+		else {
+			return menu;
+		}
 	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public MainMenu() {
-		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setSize(new Dimension(406, 429));
+	private static void initialize() {
+		menu.setLayout(null);
+		menu.setBounds(0, 0, 400, 400);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		
-		lblTitle = new JLabel("MAIN MENU");
+		JLabel lblTitle = new JLabel("MAIN MENU");
 		lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblTitle.setLocation(new Point(5, 0));
 		lblTitle.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 30));
 		lblTitle.setBounds(140, 40, 104, 66);
-		panel.add(lblTitle);
+		menu.add(lblTitle);
 		
 		JButton btnGameSelect = new JButton("Game Select");
 		btnGameSelect.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnGameSelect.setBounds(124, 125, 137, 29);
-		panel.add(btnGameSelect);
+		menu.add(btnGameSelect);
 		
 		JButton btnStatistics = new JButton("Statistics");
 		btnStatistics.setBounds(124, 200, 137, 29);
-		panel.add(btnStatistics);
+		menu.add(btnStatistics);
 		
 		JButton btnLogOut = new JButton("Log out");
 		btnLogOut.setBounds(124, 275, 137, 29);
-		panel.add(btnLogOut);
+		menu.add(btnLogOut);
 	}
 }
