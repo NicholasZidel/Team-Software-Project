@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class GameMenu {
+public class GameMenu extends JPanel{
 
 	private static GameMenu panel = null;
 	
@@ -40,8 +40,6 @@ public class GameMenu {
 	 */
 	private static void initialize() {
 		
-		JPanel panel = new JPanel();
-
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JButton leftbutton = new JButton("<");
