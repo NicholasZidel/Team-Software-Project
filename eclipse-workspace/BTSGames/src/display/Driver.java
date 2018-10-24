@@ -22,6 +22,7 @@ public class Driver {
 	private static LoginMenu LM = LoginMenu.getInstance();
 	private static MainMenu MM = MainMenu.getInstance();
 	private static GameMenu GM = GameMenu.getInstance();
+	private static StatisticsMenu SM = StatisticsMenu.getInstance();
 	
 	public void createWorld() {
 		
@@ -68,6 +69,7 @@ public class Driver {
 		frame.getContentPane().setLayout(cl);
 		frame.getContentPane().add(LM, "LM");
 		frame.getContentPane().add(MM, "MM");
+		frame.getContentPane().add(SM, "SM");
 		cl.show(frame.getContentPane(), "LM");
 	}
 }
