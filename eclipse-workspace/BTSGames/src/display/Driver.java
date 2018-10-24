@@ -3,6 +3,8 @@ package display;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -43,11 +45,17 @@ public class Driver {
 	}
 	
 	private void initialize() {
+		CardLayout cl = new CardLayout();
+		
 		LM.setSelectButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LM.setVisible(false);
-				MM.setVisible(true);
-				frame.getContentPane().remove(LM);
+				cl.show(frame.getContentPane(), "MM");
+			}
+		});
+		
+		MM.setLogoutButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(frame.getContentPane(), "LM");
 			}
 		});
 		
@@ -57,9 +65,9 @@ public class Driver {
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 352, 367);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(LM);
-		frame.getContentPane().add(MM);
-		MM.setVisible(false);
+		frame.getContentPane().setLayout(cl);
+		frame.getContentPane().add(LM, "LM");
+		frame.getContentPane().add(MM, "MM");
+		cl.show(frame.getContentPane(), "LM");
 	}
 }

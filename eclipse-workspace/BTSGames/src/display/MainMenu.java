@@ -10,12 +10,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 public class MainMenu extends JPanel {
 
 	private static MainMenu menu = null;
+	private static JButton btnLogOut = new JButton("Log out");
 	
 	public static MainMenu getInstance() {
 		if (menu == null) {
@@ -54,8 +57,11 @@ public class MainMenu extends JPanel {
 		btnStatistics.setBounds(124, 200, 137, 29);
 		menu.add(btnStatistics);
 		
-		JButton btnLogOut = new JButton("Log out");
 		btnLogOut.setBounds(124, 275, 137, 29);
 		menu.add(btnLogOut);
+	}
+	
+	public void setLogoutButton(ActionListener action) {
+		btnLogOut.addActionListener(action);
 	}
 }
