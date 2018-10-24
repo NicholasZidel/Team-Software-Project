@@ -19,6 +19,7 @@ public class LoginMenu extends JPanel {
 	}
 
 	private static LoginMenu menu = null;
+	private static JButton loginButton;
 	
 	public static LoginMenu getInstance() {
 		if (menu == null) {
@@ -50,15 +51,9 @@ public class LoginMenu extends JPanel {
 		loginPanel.setBounds(100, 257, 200, 50);
 		menu.add(loginPanel);
 		
-		JButton loginButton = new JButton("Select");
+		loginButton = new JButton("Select");
 		loginButton.setBounds(115, 15, 75, 20);
 		loginPanel.add(loginButton);
-		loginButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menu.setVisible(false);
-				//listen to this method call
-			}
-		});
 		
 		JFormattedTextField textField = new JFormattedTextField();
 		textField.setBounds(10, 15, 100, 20);
@@ -92,5 +87,9 @@ public class LoginMenu extends JPanel {
 		score3.setFont(new Font("Tahoma", Font.BOLD, 13));
 		score3.setBounds(75, 95, 50, 15);
 		scoreBoardPanel.add(score3);
+	}
+	
+	public void setSelectButton(ActionListener action) {
+		loginButton.addActionListener(action);
 	}
 }

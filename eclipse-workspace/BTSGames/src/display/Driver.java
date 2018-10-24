@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -14,6 +17,9 @@ import javax.swing.JFormattedTextField;
 public class Driver {
 	
 	private JFrame frame;
+	private static LoginMenu LM = LoginMenu.getInstance();
+	private static MainMenu MM = MainMenu.getInstance();
+	private static GameMenu GM = GameMenu.getInstance();
 	
 	public void createWorld() {
 		
@@ -37,8 +43,14 @@ public class Driver {
 	}
 	
 	private void initialize() {
-		LoginMenu LM = LoginMenu.getInstance();
-		MainMenu MM = MainMenu.getInstance();
+		LM.setSelectButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LM.setVisible(false);
+				MM.setVisible(true);
+				frame.getContentPane().remove(LM);
+			}
+		});
+		
 		frame = new JFrame();
 		frame.setMinimumSize(new Dimension(406, 429));
 		frame.setMaximumSize(new Dimension(406, 429));
@@ -48,5 +60,6 @@ public class Driver {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(LM);
 		frame.getContentPane().add(MM);
+		MM.setVisible(false);
 	}
 }
