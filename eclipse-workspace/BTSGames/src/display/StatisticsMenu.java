@@ -91,11 +91,13 @@ public class StatisticsMenu extends JPanel {
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		textField_2.setBounds(168, 77, 100, 261);
 		statsPanel.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setBounds(267, 77, 124, 261);
 		statsPanel.add(textField_3);
 		textField_3.setColumns(10);
