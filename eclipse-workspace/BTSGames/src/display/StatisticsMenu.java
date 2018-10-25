@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +24,8 @@ public class StatisticsMenu extends JPanel {
 	private static JTextField textField_1;
 	private static JTextField textField_2;
 	private static JTextField textField_3;
-
+	private static JButton btnReturnButton = new JButton("Return");
+	
 	public static StatisticsMenu getInstance() {
 		if (menu == null) {
 			menu = new StatisticsMenu();
@@ -74,9 +76,8 @@ public class StatisticsMenu extends JPanel {
 		lblLeaderboard.setBounds(276, 58, 120, 16);
 		statsPanel.add(lblLeaderboard);
 		
-		JButton btnNewButton = new JButton("Return");
-		btnNewButton.setBounds(130, 350, 140, 35);
-		statsPanel.add(btnNewButton);
+		btnReturnButton.setBounds(130, 350, 140, 35);
+		statsPanel.add(btnReturnButton);
 		
 		textField = new JTextField();
 		textField.setEditable(false);
@@ -101,5 +102,9 @@ public class StatisticsMenu extends JPanel {
 		textField_3.setBounds(267, 77, 124, 261);
 		statsPanel.add(textField_3);
 		textField_3.setColumns(10);
+	}
+	
+	public void setReturnButton(ActionListener action) {
+		btnReturnButton.addActionListener(action);
 	}
 }

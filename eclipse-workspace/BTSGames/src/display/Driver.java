@@ -72,6 +72,12 @@ public class Driver {
 			}
 		});
 		
+		SM.setReturnButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(frame.getContentPane(), "MM");
+			}
+		});
+		
 		frame = new JFrame();
 		frame.setMinimumSize(new Dimension(406, 429));
 		frame.setMaximumSize(new Dimension(406, 429));
