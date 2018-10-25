@@ -19,6 +19,8 @@ public class MainMenu extends JPanel {
 
 	private static MainMenu menu = null;
 	private static JButton btnLogOut = new JButton("Log out");
+	private static JButton btnGameSelect = new JButton("Game Select");
+	private static JButton btnStatistics = new JButton("Statistics");
 	
 	public static MainMenu getInstance() {
 		if (menu == null) {
@@ -48,12 +50,10 @@ public class MainMenu extends JPanel {
 		lblTitle.setBounds(140, 40, 104, 66);
 		menu.add(lblTitle);
 		
-		JButton btnGameSelect = new JButton("Game Select");
 		btnGameSelect.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnGameSelect.setBounds(124, 125, 137, 29);
 		menu.add(btnGameSelect);
 		
-		JButton btnStatistics = new JButton("Statistics");
 		btnStatistics.setBounds(124, 200, 137, 29);
 		menu.add(btnStatistics);
 		
@@ -63,5 +63,13 @@ public class MainMenu extends JPanel {
 	
 	public void setLogoutButton(ActionListener action) {
 		btnLogOut.addActionListener(action);
+	}
+	
+	public void setGameSelectButton(ActionListener action) {
+		btnGameSelect.addActionListener(action);
+	}
+	
+	public void setStatisticsButton(ActionListener action) {
+		btnStatistics.addActionListener(action);
 	}
 }

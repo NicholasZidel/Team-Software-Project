@@ -60,6 +60,18 @@ public class Driver {
 			}
 		});
 		
+		MM.setGameSelectButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(frame.getContentPane(), "GM");
+			}
+		});
+		
+		MM.setStatisticsButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(frame.getContentPane(), "SM");
+			}
+		});
+		
 		frame = new JFrame();
 		frame.setMinimumSize(new Dimension(406, 429));
 		frame.setMaximumSize(new Dimension(406, 429));
