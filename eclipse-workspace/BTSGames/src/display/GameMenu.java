@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
@@ -48,8 +50,14 @@ public class GameMenu extends JPanel{
 		JButton rightbutton = new JButton(">");
 		panel.add(rightbutton, BorderLayout.EAST);
 		
+		CardLayout cl = new CardLayout();
+		JPanel cardPanel = new JPanel();
+		cardPanel.setLayout(cl);
+		panel.add(cardPanel, BorderLayout.CENTER);
+		
+		//First game panel demo
 		JPanel gamePanel = new JPanel();
-		panel.add(gamePanel, BorderLayout.CENTER);
+		cardPanel.add(gamePanel, "One");
 		gamePanel.setLayout(null);
 		
 		JLabel lblGameTitle = new JLabel("Game Title");
@@ -64,8 +72,40 @@ public class GameMenu extends JPanel{
 		JButton btnTutorial = new JButton("Tutorial");
 		btnTutorial.setBounds(99, 235, 89, 23);
 		gamePanel.add(btnTutorial);
+		//First game panel demo end
+		
+		//Second game panel demo
+				JPanel gamePanel2 = new JPanel();
+				cardPanel.add(gamePanel2, "Two");
+				gamePanel2.setLayout(null);
+				
+				JLabel lblGameTitle2 = new JLabel("Game Title");
+				lblGameTitle2.setFont(new Font("Calibri", Font.PLAIN, 26));
+				lblGameTitle2.setBounds(87, 48, 169, 60);
+				gamePanel2.add(lblGameTitle2);
+				
+				JButton btnStart2 = new JButton("Start this game");
+				btnStart2.setBounds(109, 198, 99, 33);
+				gamePanel2.add(btnStart2);
+				
+				JButton btnTutorial2 = new JButton("How to play");
+				btnTutorial2.setBounds(109, 245, 99, 33);
+				gamePanel2.add(btnTutorial2);
+				//second game panel demo end
 		
 		panel.add(btnReturn, BorderLayout.SOUTH);
+		
+		leftbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.previous(cardPanel);
+			}
+		});
+		
+		rightbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.next(cardPanel);
+			}
+		});
 	}
 	
 	public void setReturnButton(ActionListener action) {
