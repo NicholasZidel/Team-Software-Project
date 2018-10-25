@@ -63,5 +63,8 @@ public class GameMenu extends JPanel{
 		JButton btnTutorial = new JButton("Tutorial");
 		btnTutorial.setBounds(99, 235, 89, 23);
 		gamePanel.add(btnTutorial);
+		
+		JButton btnReturn = new JButton("Return");
+		panel.add(btnReturn, BorderLayout.SOUTH);
 	}
 }
