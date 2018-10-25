@@ -82,6 +82,7 @@ public class Driver {
 		frame.getContentPane().add(LM, "LM");
 		frame.getContentPane().add(MM, "MM");
 		frame.getContentPane().add(SM, "SM");
+		frame.getContentPane().add(GM, "GM");
 		cl.show(frame.getContentPane(), "LM");
 	}
 }
