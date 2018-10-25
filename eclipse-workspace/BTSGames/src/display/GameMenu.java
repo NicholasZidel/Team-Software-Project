@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 public class GameMenu extends JPanel{
 
 	private static GameMenu panel = null;
+	private static JButton btnReturn = new JButton("Return");
 	
 	public static GameMenu getInstance() {
 		
@@ -64,7 +65,10 @@ public class GameMenu extends JPanel{
 		btnTutorial.setBounds(99, 235, 89, 23);
 		gamePanel.add(btnTutorial);
 		
-		JButton btnReturn = new JButton("Return");
 		panel.add(btnReturn, BorderLayout.SOUTH);
+	}
+	
+	public void setReturnButton(ActionListener action) {
+		btnReturn.addActionListener(action);
 	}
 }
