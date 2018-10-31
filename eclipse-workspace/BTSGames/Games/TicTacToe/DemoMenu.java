@@ -36,7 +36,7 @@ public class DemoMenu extends JPanel {
 		}
 	}
 	
-	public DemoMenu() {
+	private DemoMenu() {
 	}
 	
 	private static void initialize() {
