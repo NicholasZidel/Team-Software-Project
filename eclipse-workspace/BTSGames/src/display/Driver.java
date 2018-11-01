@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.SwingConstants;
 
@@ -52,15 +53,20 @@ public class Driver {
 		initialize();
 	}
 	
-	private static void setProfileWhenSelectButtonClicked() {
+	private static boolean setProfileWhenSelectButtonClicked() {
 		Profile temp = new Profile();
 		Buffer buffer = new Buffer();
 		//get file path
 		String profileName = LM.getProfileName();
 		String filePath = temp.getDirPath() + profileName + ".json";
-		JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
-		//create the instance using jsonObject 
-		currentUser = new Profile(jsonObject);
+		
+		if( new File(filePath).exists() ) {
+			JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
+			//create the instance using jsonObject 
+			currentUser = new Profile(jsonObject);
+			return true;
+		}
+		return false;
 	}
 	
 	private void initialize() {
@@ -68,8 +74,10 @@ public class Driver {
 		
 		LM.setSelectButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setProfileWhenSelectButtonClicked();
-				cl.show(frame.getContentPane(), "MM");
+				Boolean profileExists = setProfileWhenSelectButtonClicked();
+				if( profileExists == true ) {
+					cl.show(frame.getContentPane(), "MM");
+				}
 			}
 		});
 		
