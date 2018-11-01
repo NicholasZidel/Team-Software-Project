@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.Reader;
 import java.util.Scanner;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Buffer {
@@ -60,7 +61,17 @@ public class Buffer {
 		}
 		return jsonString;
 	}
-	//read file.
-	//show warning for file not existing.
+
+	public JSONObject readFileJSONObject(String path) {
+		String jsonString = readFile(path);
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = new JSONObject(jsonString);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonObject;
+	}
 }
 

@@ -2,40 +2,57 @@ package data;
 
 import java.io.File;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
 public class Profile {
 	
 	private File file;
-	private String path = "Output/Profiles/";
+	private String dirPath = "Output/Profiles/";
+	private JSONObject jsonObject;
 	
-	private static String playerNameKey = "PLayerName";
+	private static String playerNameKey = "PlayerName";
 	private static String playerProfileKey = "ProfileName";
-	private static String split = ":";
+	private static String gameKey = "";
 	
 	private String name;
 	private String profileName;
 	private File playerFile;
 	
+	public Profile() {
+		
+	}
+	
 	public Profile(String name, String profileName) {
 		this.name = name;
 		this.profileName = profileName;
-		createFilePath();
+		createDirFilePath();
 	}
 	
-	public void createFilePath() {
-		file = new File(path);
+	public Profile(JSONObject jsonObject) {
+		this.jsonObject = jsonObject;
+		try {
+			this.name = (String)this.jsonObject.get(playerNameKey);
+			this.profileName = (String)this.jsonObject.get(playerNameKey);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void createDirFilePath() {
+		file = new File(dirPath);
 		if(!file.exists()) {
 			file.mkdirs();
 		}
 	}
 	
 	public String getJSONString() {
-		JSONObject jsonObject = new JSONObject();
+		jsonObject = new JSONObject();
 		try {
-			jsonObject.accumulate(playerNameKey, name);
-			jsonObject.accumulate(playerProfileKey, profileName);
+			jsonObject.put(playerNameKey, name);
+			jsonObject.put(playerProfileKey, profileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +65,40 @@ public class Profile {
 		return forFile;
 	}*/
 	
-	public String getFilePath() {
-		return path;
+	public void updateScore(String game, int score) {
+		if(jsonObject.has(game)) {
+			try {
+				int currentScore = jsonObject.getInt(game);
+				if( currentScore < score ) {
+					jsonObject.put(game, score);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				jsonObject.put(game, score);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public int getScore(String game) {
+		int score = 0;
+		try {
+			score = jsonObject.getInt(game);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return score;
+	}
+	
+	public String getDirPath() {
+		return dirPath;
 	}
 }

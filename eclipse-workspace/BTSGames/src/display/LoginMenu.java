@@ -20,6 +20,7 @@ public class LoginMenu extends JPanel {
 
 	private static LoginMenu menu = null;
 	private static JButton loginButton;
+	private static JFormattedTextField textField;
 	
 	public static LoginMenu getInstance() {
 		if (menu == null) {
@@ -55,7 +56,7 @@ public class LoginMenu extends JPanel {
 		loginButton.setBounds(115, 15, 75, 20);
 		loginPanel.add(loginButton);
 		
-		JFormattedTextField textField = new JFormattedTextField();
+		textField = new JFormattedTextField();
 		textField.setBounds(10, 15, 100, 20);
 		loginPanel.add(textField);
 		
@@ -91,5 +92,9 @@ public class LoginMenu extends JPanel {
 	
 	public void setSelectButton(ActionListener action) {
 		loginButton.addActionListener(action);
+	}
+	
+	public String getProfileName() {
+		return textField.getText();
 	}
 }

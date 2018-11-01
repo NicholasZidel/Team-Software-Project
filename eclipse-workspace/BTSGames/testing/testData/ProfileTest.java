@@ -19,17 +19,17 @@ class ProfileTest {
 		String stringToWrite = profile.getJSONString();
 		
 		Buffer buffer = new Buffer();
-		assertTrue(buffer.writeFile(stringToWrite, profile.getFilePath() + "john.json"));
+		assertTrue(buffer.writeFile(stringToWrite, profile.getDirPath() + "john.json"));
 		
 		
-		String result = buffer.readFile(profile.getFilePath() + "john.json");
+		String result = buffer.readFile(profile.getDirPath() + "john.json");
 		System.out.println(result);
 		
 		assertEquals(result,stringToWrite);
 		
 		try {
 			JSONObject jsonObject = new JSONObject(result);
-			System.out.println(jsonObject.get("PLayerName"));
+			System.out.println(jsonObject.get("PlayerName"));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

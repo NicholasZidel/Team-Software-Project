@@ -13,6 +13,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
+
+import org.json.JSONObject;
+
+import data.Buffer;
+import data.Profile;
+
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
@@ -23,6 +29,7 @@ public class Driver {
 	private static MainMenu MM = MainMenu.getInstance();
 	private static GameMenu GM = GameMenu.getInstance();
 	private static StatisticsMenu SM = StatisticsMenu.getInstance();
+	private static Profile currentUser;
 	
 	public void createWorld() {
 		
@@ -45,17 +52,30 @@ public class Driver {
 		initialize();
 	}
 	
+	private static void setProfileWhenSelectButtonClicked() {
+		Profile temp = new Profile();
+		Buffer buffer = new Buffer();
+		//get file path
+		String profileName = LM.getProfileName();
+		String filePath = temp.getDirPath() + profileName + ".json";
+		JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
+		//create the instance using jsonObject 
+		currentUser = new Profile(jsonObject);
+	}
+	
 	private void initialize() {
 		CardLayout cl = new CardLayout();
 		
 		LM.setSelectButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setProfileWhenSelectButtonClicked();
 				cl.show(frame.getContentPane(), "MM");
 			}
 		});
 		
 		MM.setLogoutButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				currentUser = null;
 				cl.show(frame.getContentPane(), "LM");
 			}
 		});
