@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import TicTacToe.DemoMenu;
 
 public class GameMenu extends JPanel{
 
@@ -74,25 +75,9 @@ public class GameMenu extends JPanel{
 		gamePanel.add(btnTutorial);
 		//First game panel demo end
 		
-		//Second game panel demo
-				JPanel gamePanel2 = new JPanel();
-				cardPanel.add(gamePanel2, "Two");
-				gamePanel2.setLayout(null);
+		DemoMenu DM = DemoMenu.getInstance();
+		cardPanel.add(DM, "DM");
 				
-				JLabel lblGameTitle2 = new JLabel("Game Title");
-				lblGameTitle2.setFont(new Font("Calibri", Font.PLAIN, 26));
-				lblGameTitle2.setBounds(87, 48, 169, 60);
-				gamePanel2.add(lblGameTitle2);
-				
-				JButton btnStart2 = new JButton("Start this game");
-				btnStart2.setBounds(109, 198, 99, 33);
-				gamePanel2.add(btnStart2);
-				
-				JButton btnTutorial2 = new JButton("How to play");
-				btnTutorial2.setBounds(109, 245, 99, 33);
-				gamePanel2.add(btnTutorial2);
-				//second game panel demo end
-		
 		panel.add(btnReturn, BorderLayout.SOUTH);
 		
 		leftbutton.addActionListener(new ActionListener() {
