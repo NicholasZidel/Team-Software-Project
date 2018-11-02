@@ -79,6 +79,7 @@ public class TicTacToeGame {
 		frmTicTacToe = new JFrame();
 		frmTicTacToe.setTitle("Tic Tac Toe");
 		frmTicTacToe.setMinimumSize(new Dimension(350, 400));
+		frmTicTacToe.setResizable(false);
 		frmTicTacToe.setBounds(100, 100, 450, 300);
 		frmTicTacToe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
