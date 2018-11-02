@@ -47,11 +47,16 @@ public class TicTacToeGame {
 	}
 	
 	public void setPlay(JButton b, int count) {
-		if (count % 2 == 0)
+		if (count % 2 == 0 && b.getText().equals(" ")) {
 			b.setText("X");
-		else
+			counter++;
+		}
+		else if (count % 2 != 0 && b.getText().equals(" ")) {
 			b.setText("O");
-		counter++;
+			counter++;
+		}
+		else
+			return;
 	}
 	
 	public void reset() {
