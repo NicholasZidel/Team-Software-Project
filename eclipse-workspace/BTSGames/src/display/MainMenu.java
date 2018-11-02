@@ -21,6 +21,8 @@ public class MainMenu extends JPanel {
 	private static JButton btnLogOut = new JButton("Log out");
 	private static JButton btnGameSelect = new JButton("Game Select");
 	private static JButton btnStatistics = new JButton("Statistics");
+	private static JLabel lblLoggedInAs = new JLabel("Logged in as: ");
+	private String name;
 	
 	public static MainMenu getInstance() {
 		if (menu == null) {
@@ -50,6 +52,11 @@ public class MainMenu extends JPanel {
 		lblTitle.setBounds(140, 40, 104, 66);
 		menu.add(lblTitle);
 		
+		lblLoggedInAs.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblLoggedInAs.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
+		lblLoggedInAs.setBounds(100, 300, 200, 66);
+		menu.add(lblLoggedInAs);
+		
 		btnGameSelect.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnGameSelect.setBounds(124, 125, 137, 29);
 		menu.add(btnGameSelect);
@@ -71,5 +78,9 @@ public class MainMenu extends JPanel {
 	
 	public void setStatisticsButton(ActionListener action) {
 		btnStatistics.addActionListener(action);
+	}
+	
+	public void setLoggedInAsName(String name) {
+		lblLoggedInAs.setText("Logged in as: " + name);
 	}
 }

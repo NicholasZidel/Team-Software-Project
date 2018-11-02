@@ -76,7 +76,11 @@ public class Driver {
 			public void actionPerformed(ActionEvent e) {
 				Boolean profileExists = setProfileWhenSelectButtonClicked();
 				if( profileExists == true ) {
+					MM.setLoggedInAsName(currentUser.getName());
 					cl.show(frame.getContentPane(), "MM");
+				}
+				else {
+//					Create popup menu
 				}
 			}
 		});

@@ -41,6 +41,10 @@ public class Profile {
 		}
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public void createDirFilePath() {
 		file = new File(dirPath);
 		if(!file.exists()) {
