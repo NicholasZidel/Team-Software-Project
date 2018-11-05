@@ -2,6 +2,7 @@ package data;
 
 import java.io.File;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,20 +14,17 @@ public class Profile {
 	private JSONObject jsonObject;
 	
 	private static String playerNameKey = "PlayerName";
-	private static String playerProfileKey = "ProfileName";
 	private static String gameKey = "";
 	
 	private String name;
-	private String profileName;
 	private File playerFile;
 	
 	public Profile() {
 		
 	}
 	
-	public Profile(String name, String profileName) {
+	public Profile(String name) {
 		this.name = name;
-		this.profileName = profileName;
 		createDirFilePath();
 	}
 	
@@ -34,7 +32,6 @@ public class Profile {
 		this.jsonObject = jsonObject;
 		try {
 			this.name = (String)this.jsonObject.get(playerNameKey);
-			this.profileName = (String)this.jsonObject.get(playerNameKey);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,11 +53,16 @@ public class Profile {
 		jsonObject = new JSONObject();
 		try {
 			jsonObject.put(playerNameKey, name);
-			jsonObject.put(playerProfileKey, profileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return jsonObject.toString();
+	}
+	
+	public String writeJSONFile() {
+		Buffer buffer = new Buffer();
+		buffer.writeFile(this.getJSONString(), dirPath + name + ".json");
+		return dirPath + name + ".json";
 	}
 	/*
 	public String createStringForFile() {

@@ -140,9 +140,11 @@ public class Driver {
 		
 		createAction = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				currentUser = new Profile(LM.getProfileName());
 			}
 		};
+		
+		LM.setSelectButton(loginAction);
 		
 		LM.setCreateProfileButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
