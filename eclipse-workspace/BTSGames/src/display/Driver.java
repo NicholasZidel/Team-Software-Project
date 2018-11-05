@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
@@ -133,7 +134,25 @@ public class Driver {
 					cl.show(frame.getContentPane(), "MM");
 				}
 				else {
-//					Create popup menu
+					JFrame poppup = new JFrame("User does not exist");
+					poppup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					poppup.setLayout(new FlowLayout());
+					poppup.setSize(275, 125);
+					poppup.setResizable(false);
+					JLabel lbl1 = new JLabel("Error: User does not exits.");
+					JLabel lbl2 = new JLabel("Check your spelling or create a new user.");
+					JButton btnOK = new JButton("OK");
+					poppup.getContentPane().add(lbl1);
+					poppup.getContentPane().add(lbl2);
+					poppup.getContentPane().add(btnOK);
+					poppup.setVisible(true);
+					frame.setEnabled(false);
+					btnOK.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							frame.setEnabled(true);
+							poppup.dispose();
+						}
+					});
 				}
 			}
 		};
