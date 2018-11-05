@@ -144,6 +144,8 @@ public class Driver {
 			}
 		};
 		
+		LM.setSelectButton(loginAction);
+		
 		LM.setCreateProfileButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (login) {
