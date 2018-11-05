@@ -193,12 +193,14 @@ public class TicTacToeGame {
 			if (rowCheck == 3) {
 				if (rows[i][0] == 1 && rows[i][1] == 1 && rows[i][2] == 1) {
 					win(i, 0);
+					endGame();
 					return;
 				}
 			}
 			if (rowCheck == 3) {
 				if (rows[i][0] == 2 && rows[i][1] == 2 && rows[i][2] == 2) {
 					win(i, 1);
+					endGame();
 					return;
 				}
 			}
