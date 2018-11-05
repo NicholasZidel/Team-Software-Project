@@ -14,7 +14,7 @@ class ProfileTest {
 
 	@Test
 	void testStringForFile() {
-		Profile profile = new Profile("John", "j_money");
+		Profile profile = new Profile("John");
 		
 		String stringToWrite = profile.getJSONString();
 		
@@ -35,4 +35,10 @@ class ProfileTest {
 		}
 	}
 	
+	@Test
+	void testProfilewriteJSONFile() {
+		Profile profile = new Profile("Jim");
+		
+		profile.writeJSONFile();
+	}
 }

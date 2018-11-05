@@ -140,7 +140,7 @@ public class Driver {
 		
 		createAction = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentUser = new Profile(LM.getProfileName(), LM.getProfileName());
+				currentUser = new Profile(LM.getProfileName());
 			}
 		};
 		
