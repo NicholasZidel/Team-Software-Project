@@ -27,12 +27,12 @@ public class AI {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (board[i][j] == 0) {
-					if (j == 0) {
-						possible.add(i+1);
-					} else if (j == 1) {
-						possible.add(i+4);
+					if (i == 0) {
+						possible.add(j+1);
+					} else if (i == 1) {
+						possible.add(j+4);
 					} else {
-						possible.add(i+7);
+						possible.add(j+7);
 					}
 				}
 			}
@@ -93,12 +93,11 @@ public class AI {
 			rows[6][i] = board[count][i];
 			count++;
 		}
-		count = 3;
+		count = 2;
 		for (int i = 0; i < 3; i++) {
 			rows[7][i] = board[count][i];
 			count--;
 		}
-		
 		//checks to see if player has two in a row and then plays in that row
 		for (int i = 0; i < 8; i++) {
 			count = 0;
@@ -121,8 +120,8 @@ public class AI {
 		//plays move in specified column
 		if (row >= 0 && row < 3) {
 			for(int i = 0; i < 3; i++) {
-				if (board[row][i] == 0) {
-					board[row][i] = 2;
+				if (board[i][row] == 0) {
+					board[i][row] = 2;
 					return board;
 				}
 			}
@@ -131,8 +130,8 @@ public class AI {
 		//plays move in specified row
 		if (row >= 3 && row < 6) {
 			for(int i = 0; i < 3; i++) {
-				if (board[i][row-3] == 0) {
-					board[i][row-3] = 2;
+				if (board[row-3][i] == 0) {
+					board[row-3][i] = 2;
 					return board;
 				}
 			}
