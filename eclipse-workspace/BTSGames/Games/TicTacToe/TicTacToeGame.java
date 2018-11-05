@@ -26,6 +26,7 @@ public class TicTacToeGame {
 	private int[][] board2;
 	private int[] buttonPosition;
 	private AI computer;
+	private int gameEnd;
 
 	/**
 	 * Launch the application.
@@ -62,7 +63,12 @@ public class TicTacToeGame {
 		board[buttonPosition[0]][buttonPosition[1]] = 1;
 		board2[buttonPosition[0]][buttonPosition[1]] = 1;
 		b.setText("X");
+		gameEnd++;
+		System.out.println(gameEnd);
 		checkWin(0);
+		if (gameEnd == 9) {
+			return;
+		}
 		
 		board2 = computer.decision(board2);
 		for (int i = 0; i < 3; i++) {
@@ -108,11 +114,32 @@ public class TicTacToeGame {
 				Button9.setText("O");
 			}
 		}
+		gameEnd++;
+		System.out.println(gameEnd);
 		checkWin(1);
+	}
+	
+	private void endGame() {
+		Button1.setEnabled(false);
+		Button2.setEnabled(false);
+		Button3.setEnabled(false);
+		Button4.setEnabled(false);
+		Button5.setEnabled(false);
+		Button6.setEnabled(false);
+		Button7.setEnabled(false);
+		Button8.setEnabled(false);
+		Button9.setEnabled(false);
 	}
 	
 	//add ability to updated profile later
 	private void checkWin(int currentTurn) {
+		if (gameEnd == 9) {
+			winStatement.setText("TIE GAME");
+			winStatement.setVisible(true);
+			endGame();
+			return;
+		}
+		
 		/*
 		 * rows is a 2D array listing all the 3 row combinations in tic tac toe
 		 * rows 0-2 are columns 1-3
@@ -147,6 +174,13 @@ public class TicTacToeGame {
 			rows[7][i] = board[count][i];
 			count--;
 		}
+//		for (int i = 0; i < 8; i++) {
+//			for (int j = 0; j < 3; j++) {
+//				System.out.print(rows[i][j]);
+//			}
+//			System.out.print("\n");
+//		}
+//		System.out.print("\n");
 		
 		//check to see if there are 3 in a row
 		int rowCheck = 0;
@@ -157,8 +191,15 @@ public class TicTacToeGame {
 				}
 			}
 			if (rowCheck == 3) {
-				if (rows[i][0] == rows[i][1] && rows[i][1] == rows[i][2]) {
-					win(i, currentTurn);
+				if (rows[i][0] == 1 && rows[i][1] == 1 && rows[i][2] == 1) {
+					win(i, 0);
+					return;
+				}
+			}
+			if (rowCheck == 3) {
+				if (rows[i][0] == 2 && rows[i][1] == 2 && rows[i][2] == 2) {
+					win(i, 1);
+					return;
 				}
 			}
 			rowCheck = 0;
@@ -177,6 +218,15 @@ public class TicTacToeGame {
 	}
 	
 	private void reset() {
+		Button1.setEnabled(true);
+		Button2.setEnabled(true);
+		Button3.setEnabled(true);
+		Button4.setEnabled(true);
+		Button5.setEnabled(true);
+		Button6.setEnabled(true);
+		Button7.setEnabled(true);
+		Button8.setEnabled(true);
+		Button9.setEnabled(true);
 		Button1.setText(" ");
 		Button2.setText(" ");
 		Button3.setText(" ");
@@ -189,6 +239,7 @@ public class TicTacToeGame {
 		board = new int[3][3];
 		board2 = new int[3][3];
 		winStatement.setVisible(false);
+		gameEnd = 0;
 	}
 
 	/**
