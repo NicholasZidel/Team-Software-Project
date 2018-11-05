@@ -19,9 +19,13 @@ import java.awt.Color;
 public class TicTacToeGame {
 
 	JButton Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9;
-	private int counter = 0;
+	private JLabel winStatement;
 	private JFrame frmTicTacToe;
 	private JButton resetButton;
+	private int[][] board;
+	private int[][] board2;
+	private int[] buttonPosition;
+	private AI computer;
 
 	/**
 	 * Launch the application.
@@ -43,23 +47,136 @@ public class TicTacToeGame {
 	 * Create the application.
 	 */
 	public TicTacToeGame() {
+		board = new int[3][3];
+		board2 = new int[3][3];
+		buttonPosition = new int[2];
+		computer = new AI(1);
 		initialize();
 	}
 	
-	public void setPlay(JButton b, int count) {
-		if (count % 2 == 0 && b.getText().equals(" ")) {
-			b.setText("X");
-			counter++;
-		}
-		else if (count % 2 != 0 && b.getText().equals(" ")) {
-			b.setText("O");
-			counter++;
-		}
-		else
+	private void setPlay(JButton b) {
+		if (!b.getText().equals(" ")) {
 			return;
+		}
+
+		board[buttonPosition[0]][buttonPosition[1]] = 1;
+		board2[buttonPosition[0]][buttonPosition[1]] = 1;
+		b.setText("X");
+		checkWin(0);
+		
+		board2 = computer.decision(board2);
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (board[i][j] != board2[i][j]) {
+					buttonPosition[0] = i;
+					buttonPosition[1] = j;
+				}
+			}
+		}
+		board[buttonPosition[0]][buttonPosition[1]] = 2;
+		
+		if (buttonPosition[0] == 0) {
+			if (buttonPosition[1] == 0) {
+				Button1.setText("O");
+			}
+			if (buttonPosition[1] == 1) {
+				Button2.setText("O");
+			}
+			if (buttonPosition[1] == 2) {
+				Button3.setText("O");
+			}
+		}
+		if (buttonPosition[0] == 1) {
+			if (buttonPosition[1] == 0) {
+				Button4.setText("O");
+			}
+			if (buttonPosition[1] == 1) {
+				Button5.setText("O");
+			}
+			if (buttonPosition[1] == 2) {
+				Button6.setText("O");
+			}
+		}
+		if (buttonPosition[0] == 2) {
+			if (buttonPosition[1] == 0) {
+				Button7.setText("O");
+			}
+			if (buttonPosition[1] == 1) {
+				Button8.setText("O");
+			}
+			if (buttonPosition[1] == 2) {
+				Button9.setText("O");
+			}
+		}
+		checkWin(1);
 	}
 	
-	public void reset() {
+	//add ability to updated profile later
+	private void checkWin(int currentTurn) {
+		/*
+		 * rows is a 2D array listing all the 3 row combinations in tic tac toe
+		 * rows 0-2 are columns 1-3
+		 * rows 3-5 are rows 1-3
+		 * row 6 is diagonal from upper left to lower right
+		 * row 7 is diagonal from lower left to upper right
+		 */
+		int[][] rows = new int[8][3];
+		
+		//fills the row 2d array with proper places
+		int count = 0;
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				rows[i][j] = board[j][count];
+			}
+			count++;
+		}
+		count = 0;
+		for(int i = 3; i < 6; i++) {
+			for (int j = 0; j < 3; j++) {
+				rows[i][j] = board[count][j];
+			}
+			count++;
+		}
+		count = 0;
+		for (int i = 0; i < 3; i++) {
+			rows[6][i] = board[count][i];
+			count++;
+		}
+		count = 2;
+		for (int i = 0; i < 3; i++) {
+			rows[7][i] = board[count][i];
+			count--;
+		}
+		
+		//check to see if there are 3 in a row
+		int rowCheck = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 3; j++ ) {
+				if (rows[i][j] != 0) {
+					rowCheck++;
+				}
+			}
+			if (rowCheck == 3) {
+				if (rows[i][0] == rows[i][1] && rows[i][1] == rows[i][2]) {
+					win(i, currentTurn);
+				}
+			}
+			rowCheck = 0;
+		}
+	}
+	
+	private void win(int currentRow, int currentTurn) {
+		//passing current row for ability to mark where win was
+		if (currentTurn == 0) {
+			winStatement.setText("YOU WIN!!");
+			winStatement.setVisible(true);
+		} else {
+			winStatement.setText("YOU LOSE");
+			winStatement.setVisible(true);
+		}
+	}
+	
+	private void reset() {
 		Button1.setText(" ");
 		Button2.setText(" ");
 		Button3.setText(" ");
@@ -69,7 +186,9 @@ public class TicTacToeGame {
 		Button7.setText(" ");
 		Button8.setText(" ");
 		Button9.setText(" ");
-		counter = 0;
+		board = new int[3][3];
+		board2 = new int[3][3];
+		winStatement.setVisible(false);
 	}
 
 	/**
@@ -78,7 +197,7 @@ public class TicTacToeGame {
 	private void initialize() {
 		frmTicTacToe = new JFrame();
 		frmTicTacToe.setTitle("Tic Tac Toe");
-		frmTicTacToe.setMinimumSize(new Dimension(350, 400));
+		frmTicTacToe.setMinimumSize(new Dimension(550, 400));
 		frmTicTacToe.setResizable(false);
 		frmTicTacToe.setBounds(100, 100, 450, 300);
 		frmTicTacToe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,7 +260,9 @@ public class TicTacToeGame {
 		Button1.setBackground(Color.CYAN);
 		Button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button1, counter);
+				buttonPosition[0] = 0;
+				buttonPosition[1] = 0;
+				setPlay(Button1);
 			}
 		});
 		Button1.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -157,7 +278,9 @@ public class TicTacToeGame {
 		Button2.setBackground(Color.CYAN);
 		Button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button2, counter);
+				buttonPosition[0] = 0;
+				buttonPosition[1] = 1;
+				setPlay(Button2);
 			}
 		});
 		Button2.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -173,7 +296,9 @@ public class TicTacToeGame {
 		Button3.setBackground(Color.CYAN);
 		Button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button3, counter);
+				buttonPosition[0] = 0;
+				buttonPosition[1] = 2;
+				setPlay(Button3);
 			}
 		});
 		Button3.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -189,7 +314,9 @@ public class TicTacToeGame {
 		Button4.setBackground(Color.CYAN);
 		Button4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button4, counter);
+				buttonPosition[0] = 1;
+				buttonPosition[1] = 0;
+				setPlay(Button4);
 			}
 		});
 		Button4.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -205,7 +332,9 @@ public class TicTacToeGame {
 		Button5.setBackground(Color.CYAN);
 		Button5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button5, counter);
+				buttonPosition[0] = 1;
+				buttonPosition[1] = 1;
+				setPlay(Button5);
 			}
 		});
 		Button5.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -221,7 +350,9 @@ public class TicTacToeGame {
 		Button6.setBackground(Color.CYAN);
 		Button6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button6, counter);
+				buttonPosition[0] = 1;
+				buttonPosition[1] = 2;
+				setPlay(Button6);
 			}
 		});
 		Button6.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -237,7 +368,9 @@ public class TicTacToeGame {
 		Button7.setBackground(Color.CYAN);
 		Button7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button7, counter);
+				buttonPosition[0] = 2;
+				buttonPosition[1] = 0;
+				setPlay(Button7);
 			}
 		});
 		Button7.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -253,7 +386,9 @@ public class TicTacToeGame {
 		Button8.setBackground(Color.CYAN);
 		Button8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button8, counter);
+				buttonPosition[0] = 2;
+				buttonPosition[1] = 1;
+				setPlay(Button8);
 			}
 		});
 		Button8.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -269,7 +404,9 @@ public class TicTacToeGame {
 		Button9.setBackground(Color.CYAN);
 		Button9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPlay(Button9, counter);
+				buttonPosition[0] = 2;
+				buttonPosition[1] = 2;
+				setPlay(Button9);
 			}
 		});
 		Button9.setFont(new Font("Tahoma", Font.PLAIN, 76));
@@ -279,6 +416,13 @@ public class TicTacToeGame {
 		gbc_Button9.gridx = 2;
 		gbc_Button9.gridy = 3;
 		panel.add(Button9, gbc_Button9);
+		
+		//Win Label ----------------------------------------------------------------------------
+		winStatement = new JLabel("");
+		winStatement.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		winStatement.setPreferredSize(new Dimension(100, 300));
+		winStatement.setVisible(false);
+		panel.add(winStatement);
 	}
 
 }
