@@ -31,6 +31,10 @@ public class Driver {
 	private static GameMenu GM = GameMenu.getInstance();
 	private static StatisticsMenu SM = StatisticsMenu.getInstance();
 	private static Profile currentUser;
+	boolean login = true;
+	private static CardLayout cl = new CardLayout();
+	private static ActionListener loginAction;
+	private static ActionListener createAction;
 	
 	public void createWorld() {
 		
@@ -70,20 +74,8 @@ public class Driver {
 	}
 	
 	private void initialize() {
-		CardLayout cl = new CardLayout();
 		
-		LM.setSelectButton(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Boolean profileExists = setProfileWhenSelectButtonClicked();
-				if( profileExists == true ) {
-					MM.setLoggedInAsName(currentUser.getName());
-					cl.show(frame.getContentPane(), "MM");
-				}
-				else {
-//					Create popup menu
-				}
-			}
-		});
+		loginButtonSetup();
 		
 		MM.setLogoutButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -130,5 +122,41 @@ public class Driver {
 		frame.getContentPane().add(SM, "SM");
 		frame.getContentPane().add(GM, "GM");
 		cl.show(frame.getContentPane(), "LM");
+	}
+	
+	private void loginButtonSetup() {
+		loginAction = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Boolean profileExists = setProfileWhenSelectButtonClicked();
+				if( profileExists == true ) {
+					MM.setLoggedInAsName(currentUser.getName());
+					cl.show(frame.getContentPane(), "MM");
+				}
+				else {
+//					Create popup menu
+				}
+			}
+		};
+		
+		createAction = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		};
+		
+		LM.setCreateProfileButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (login) {
+					LM.setSelectButtonText("Create");
+					LM.setSelectButton(createAction);
+					login = false;
+				}
+				else {
+					LM.setSelectButtonText("Login");
+					LM.setSelectButton(loginAction);
+					login = true;
+				}
+			}
+		});
 	}
 }

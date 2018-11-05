@@ -3,6 +3,8 @@ package display;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ public class LoginMenu extends JPanel {
 
 	private static LoginMenu menu = null;
 	private static JButton loginButton;
+	private static JButton createProfile;
 	private static JFormattedTextField textField;
 	
 	public static LoginMenu getInstance() {
@@ -49,10 +52,11 @@ public class LoginMenu extends JPanel {
 		
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(null);
-		loginPanel.setBounds(100, 257, 200, 50);
+		loginPanel.setBounds(100, 200, 200, 100);
+		loginPanel.setBackground(new Color(0, 0, 255));
 		menu.add(loginPanel);
 		
-		loginButton = new JButton("Select");
+		loginButton = new JButton("Login");
 		loginButton.setBounds(115, 15, 75, 20);
 		loginPanel.add(loginButton);
 		
@@ -60,38 +64,25 @@ public class LoginMenu extends JPanel {
 		textField.setBounds(10, 15, 100, 20);
 		loginPanel.add(textField);
 		
-		JPanel scoreBoardPanel = new JPanel();
-		scoreBoardPanel.setLayout(null);
-		scoreBoardPanel.setBounds(100, 121, 200, 125);
-		menu.add(scoreBoardPanel);
-		
-		JLabel topScoreTitle = new JLabel("Top Scores:");
-		topScoreTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		topScoreTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
-		topScoreTitle.setBounds(50, 10, 100, 25);
-		scoreBoardPanel.add(topScoreTitle);
-		
-		JLabel score1 = new JLabel("BBB");
-		score1.setHorizontalAlignment(SwingConstants.CENTER);
-		score1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		score1.setBounds(75, 45, 50, 15);
-		scoreBoardPanel.add(score1);
-		
-		JLabel score2 = new JLabel("AAA");
-		score2.setHorizontalAlignment(SwingConstants.CENTER);
-		score2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		score2.setBounds(75, 70, 50, 15);
-		scoreBoardPanel.add(score2);
-		
-		JLabel score3 = new JLabel("AAA");
-		score3.setHorizontalAlignment(SwingConstants.CENTER);
-		score3.setFont(new Font("Tahoma", Font.BOLD, 13));
-		score3.setBounds(75, 95, 50, 15);
-		scoreBoardPanel.add(score3);
+		createProfile = new JButton("Create profile");
+		createProfile.setBounds(10, 45, 180, 20);
+		loginPanel.add(createProfile);
 	}
 	
 	public void setSelectButton(ActionListener action) {
 		loginButton.addActionListener(action);
+	}
+	
+	public void setCreateProfileButton(ActionListener action) {
+		createProfile.addActionListener(action);
+	}
+	
+	public void setSelectButtonText(String str) {
+		loginButton.setText(str);
+	}
+	
+	public void setCreateProfileButtonText(String str) {
+		createProfile.setText(str);
 	}
 	
 	public String getProfileName() {
