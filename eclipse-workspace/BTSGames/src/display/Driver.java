@@ -149,11 +149,13 @@ public class Driver {
 				if (login) {
 					LM.setSelectButtonText("Create");
 					LM.setSelectButton(createAction);
+					LM.setCreateProfileButtonText("Existing profile");
 					login = false;
 				}
 				else {
 					LM.setSelectButtonText("Login");
 					LM.setSelectButton(loginAction);
+					LM.setCreateProfileButtonText("Create profile");
 					login = true;
 				}
 			}
