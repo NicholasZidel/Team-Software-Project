@@ -25,6 +25,13 @@ public class Profile {
 	
 	public Profile(String name) {
 		this.name = name;
+		jsonObject = new JSONObject();
+		try {
+			jsonObject.put(playerNameKey, name);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		createDirFilePath();
 	}
 	
@@ -50,12 +57,6 @@ public class Profile {
 	}
 	
 	public String getJSONString() {
-		jsonObject = new JSONObject();
-		try {
-			jsonObject.put(playerNameKey, name);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return jsonObject.toString();
 	}
 	
@@ -71,23 +72,19 @@ public class Profile {
 		return forFile;
 	}*/
 	
-	public void updateScore(String game, int score) {
+	public void updateScore(String game) {
 		if(jsonObject.has(game)) {
 			try {
 				int currentScore = jsonObject.getInt(game);
-				if( currentScore < score ) {
-					jsonObject.put(game, score);
-				}
+				jsonObject.put(game, currentScore + 1);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else {
 			try {
-				jsonObject.put(game, score);
+				jsonObject.put(game, 1);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

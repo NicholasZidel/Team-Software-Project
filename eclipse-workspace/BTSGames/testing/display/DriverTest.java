@@ -8,7 +8,15 @@ class DriverTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
-
+	
+	@Test
+	void testLoginButton() {
+		//set up
+		Driver driver = new Driver();
+		driver.createWorld();
+		
+		
+	}
 }
