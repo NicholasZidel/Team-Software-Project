@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
@@ -27,11 +28,32 @@ public class TicTacToeGame {
 	private int[] buttonPosition;
 	private AI computer;
 	private int gameEnd;
+	private int dif;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TicTacToeGame window = new TicTacToeGame();
+					window.frmTicTacToe.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	*/
+	//------------------------------------------------------------------------
+	// sets difficulty 0 - 2 : easy - hard 
+	public void setDif(int dif) {
+		this.dif = dif;
+	}
+	//------------------------------------------------------------------------
+	
+	public void createFrame() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,7 +73,7 @@ public class TicTacToeGame {
 		board = new int[3][3];
 		board2 = new int[3][3];
 		buttonPosition = new int[2];
-		computer = new AI(1);
+		computer = new AI(dif);
 		initialize();
 	}
 	
@@ -253,17 +275,72 @@ public class TicTacToeGame {
 		frmTicTacToe.setMinimumSize(new Dimension(550, 400));
 		frmTicTacToe.setResizable(false);
 		frmTicTacToe.setBounds(100, 100, 450, 300);
-		frmTicTacToe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTicTacToe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+
 		
 		JPanel panel = new JPanel();
+		//panel.setVisible(false);
+		
 		panel.setBackground(Color.GRAY);
-		frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
+		//frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
+		
+		
+		//-------------------------------------------------------------------------------
+		DifficultyPanel Dp = DifficultyPanel.getInstance();
+		Dp.setVisible(true);
+		frmTicTacToe.getContentPane().add(Dp);
+		
+		Dp.setEButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dp.setVisible(false);
+				setDif(0);
+				frmTicTacToe.getContentPane().remove(Dp);
+				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
+			}
+		});
+		
+		Dp.setNButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dp.setVisible(false);
+				setDif(1);
+				frmTicTacToe.getContentPane().remove(Dp);
+				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
+			}
+		});
+		
+		Dp.setHButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dp.setVisible(false);
+				setDif(1);
+				frmTicTacToe.getContentPane().remove(Dp);
+				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
+			}
+		});
+		
+		
+		
+//		DemoMenu DM = DemoMenu.getInstance();
+//		
+//		DifficultyPanel DP = DifficultyPanel.getInstance();
+//		panel.add(DP, "DP");
+//		
+//		DM.setPlayButton(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				createFrame();
+//				cl.show(panel, "DP");
+//			}
+//		});
+//		
+		//-------------------------------------------------------------------------------
+		
+		
 		
 		//Reset button----------------------------------------------------------------------------------------------------------------------
 		resetButton = new JButton("Reset");
@@ -476,6 +553,7 @@ public class TicTacToeGame {
 		winStatement.setPreferredSize(new Dimension(100, 300));
 		winStatement.setVisible(false);
 		panel.add(winStatement);
+
 	}
 
 }

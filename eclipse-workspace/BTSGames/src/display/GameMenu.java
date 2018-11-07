@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import TicTacToe.DemoMenu;
+import TicTacToe.DifficultyPanel;
+import TicTacToe.TicTacToeGame;
 
 public class GameMenu extends JPanel{
 
@@ -78,6 +80,22 @@ public class GameMenu extends JPanel{
 		
 		DemoMenu DM = DemoMenu.getInstance();
 		cardPanel.add(DM, "DM");
+		
+		//------------------------------------------------------------------------
+		//DifficultyPanel DP = DifficultyPanel.getInstance();
+		//cardPanel.add(DP, "DP");
+		
+		DM.setPlayButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//DP.setVisible(true);
+				//cl.show(cardPanel, "DP");
+
+				TicTacToeGame ttt = new TicTacToeGame();
+				ttt.createFrame();							//runs tictactoe game
+
+			}
+		});
+		//------------------------------------------------------------------------
 				
 		panel.add(btnReturn, BorderLayout.SOUTH);
 		

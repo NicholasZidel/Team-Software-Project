@@ -23,6 +23,7 @@ import display.GameMenu;
 public class DemoMenu extends JPanel {
 	
 	private static DemoMenu panel = null;
+	private static JButton btnPlay = null;
 	
 	public static DemoMenu getInstance() {
 		
@@ -53,7 +54,7 @@ public class DemoMenu extends JPanel {
 		lblTicTacToe.setBounds(55, 55, 200, 60);
 		panel.add(lblTicTacToe);
 		
-		JButton btnPlay = new JButton("Play!");
+		btnPlay = new JButton("Play!");
 		btnPlay.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
 		btnPlay.setBackground(Color.BLUE);
 		btnPlay.setBounds(95, 150, 120, 30);
@@ -66,4 +67,15 @@ public class DemoMenu extends JPanel {
 		btnTutorial.setBounds(95, 200, 120, 30);
 		panel.add(btnTutorial);
 	}
+	
+	
+	
+	//------------------------------------------------------------------------
+	public void setPlayButton(ActionListener a) {
+		btnPlay.addActionListener(a);
+	}
+	//------------------------------------------------------------------------
+	
+	
+
 }
