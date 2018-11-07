@@ -28,7 +28,6 @@ public class TicTacToeGame {
 	private int[] buttonPosition;
 	private AI computer;
 	private int gameEnd;
-	private int dif;
 
 	/**
 	 * Launch the application.
@@ -46,11 +45,6 @@ public class TicTacToeGame {
 		});
 	}
 	*/
-	//------------------------------------------------------------------------
-	// sets difficulty 0 - 2 : easy - hard 
-	public void setDif(int dif) {
-		this.dif = dif;
-	}
 	//------------------------------------------------------------------------
 	
 	public void createFrame() {
@@ -73,7 +67,6 @@ public class TicTacToeGame {
 		board = new int[3][3];
 		board2 = new int[3][3];
 		buttonPosition = new int[2];
-		computer = new AI(dif);
 		initialize();
 	}
 	
@@ -86,7 +79,6 @@ public class TicTacToeGame {
 		board2[buttonPosition[0]][buttonPosition[1]] = 1;
 		b.setText("X");
 		gameEnd++;
-		System.out.println(gameEnd);
 		checkWin(0);
 		if (gameEnd == 9) {
 			return;
@@ -137,7 +129,6 @@ public class TicTacToeGame {
 			}
 		}
 		gameEnd++;
-		System.out.println(gameEnd);
 		checkWin(1);
 	}
 	
@@ -155,13 +146,6 @@ public class TicTacToeGame {
 	
 	//add ability to updated profile later
 	private void checkWin(int currentTurn) {
-		if (gameEnd == 9) {
-			winStatement.setText("TIE GAME");
-			winStatement.setVisible(true);
-			endGame();
-			return;
-		}
-		
 		/*
 		 * rows is a 2D array listing all the 3 row combinations in tic tac toe
 		 * rows 0-2 are columns 1-3
@@ -227,6 +211,13 @@ public class TicTacToeGame {
 				}
 			}
 			rowCheck = 0;
+		}
+		
+		if (gameEnd == 9) {
+			winStatement.setText("TIE GAME");
+			winStatement.setVisible(true);
+			endGame();
+			return;
 		}
 	}
 	
@@ -300,7 +291,7 @@ public class TicTacToeGame {
 		Dp.setEButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dp.setVisible(false);
-				setDif(0);
+				computer = new AI(0);
 				frmTicTacToe.getContentPane().remove(Dp);
 				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
 			}
@@ -309,7 +300,7 @@ public class TicTacToeGame {
 		Dp.setNButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dp.setVisible(false);
-				setDif(1);
+				computer = new AI(1);
 				frmTicTacToe.getContentPane().remove(Dp);
 				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
 			}
@@ -318,7 +309,7 @@ public class TicTacToeGame {
 		Dp.setHButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dp.setVisible(false);
-				setDif(1);
+				computer = new AI(1);
 				frmTicTacToe.getContentPane().remove(Dp);
 				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
 			}
