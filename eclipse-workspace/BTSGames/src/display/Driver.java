@@ -31,6 +31,7 @@ public class Driver {
 	private static MainMenu MM = MainMenu.getInstance();
 	private static GameMenu GM = GameMenu.getInstance();
 	private static StatisticsMenu SM = StatisticsMenu.getInstance();
+	private static Poppup pop = Poppup.getInstance();
 	private static Profile currentUser;
 	boolean login = true;
 	private static CardLayout cl = new CardLayout();
@@ -65,10 +66,13 @@ public class Driver {
 		String profileName = LM.getProfileName();
 		String filePath = temp.getDirPath() + profileName + ".json";
 		
+		System.out.println(profileName);
+		
 		if( new File(filePath).exists() ) {
 			JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
 			//create the instance using jsonObject 
 			currentUser = new Profile(jsonObject);
+			System.out.println("I got here somehow");
 			return true;
 		}
 		return false;
@@ -109,7 +113,19 @@ public class Driver {
 			}
 		});
 		
+		pop.setAREbutton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setEnabled(true);
+				pop.hideARE();
+			}
+		});
 		
+		pop.setDNEbutton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setEnabled(true);
+				pop.hideDNE();
+			}
+		});
 		
 		frame = new JFrame();
 		frame.setMinimumSize(new Dimension(406, 429));
@@ -126,58 +142,29 @@ public class Driver {
 	}
 	
 	private void loginButtonSetup() {
-		loginAction = new ActionListener() {
+		LM.setLoginButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Boolean profileExists = setProfileWhenSelectButtonClicked();
-				if( profileExists == true ) {
+				if (setProfileWhenSelectButtonClicked()) {
 					MM.setLoggedInAsName(currentUser.getName());
 					cl.show(frame.getContentPane(), "MM");
 				}
 				else {
-					JFrame poppup = new JFrame("User does not exist");
-					poppup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-					poppup.setLayout(new FlowLayout());
-					poppup.setSize(275, 125);
-					poppup.setResizable(false);
-					JLabel lbl1 = new JLabel("Error: User does not exits.");
-					JLabel lbl2 = new JLabel("Check your spelling or create a new user.");
-					JButton btnOK = new JButton("OK");
-					poppup.getContentPane().add(lbl1);
-					poppup.getContentPane().add(lbl2);
-					poppup.getContentPane().add(btnOK);
-					poppup.setVisible(true);
 					frame.setEnabled(false);
-					btnOK.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							frame.setEnabled(true);
-							poppup.dispose();
-						}
-					});
+					pop.showDNE();
 				}
 			}
-		};
+		});
 		
-		createAction = new ActionListener() {
+		LM.setCreateButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentUser = new Profile(LM.getProfileName());
-			}
-		};
-		
-		LM.setSelectButton(loginAction);
-		
-		LM.setCreateProfileButton(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (login) {
-					LM.setSelectButtonText("Create");
-					LM.setSelectButton(createAction);
-					LM.setCreateProfileButtonText("Existing profile");
-					login = false;
+				System.out.println(setProfileWhenSelectButtonClicked());
+				if (!setProfileWhenSelectButtonClicked()) {
+					currentUser = new Profile(LM.getProfileName());
+					currentUser.writeJSONFile();
 				}
 				else {
-					LM.setSelectButtonText("Login");
-					LM.setSelectButton(loginAction);
-					LM.setCreateProfileButtonText("Create profile");
-					login = true;
+					frame.setEnabled(false);
+					pop.showARE();
 				}
 			}
 		});

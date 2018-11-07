@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -23,7 +24,13 @@ public class LoginMenu extends JPanel {
 	private static LoginMenu menu = null;
 	private static JButton loginButton;
 	private static JButton createProfile;
+	private static JButton createButton;
+	private static JButton loginProfile;
 	private static JFormattedTextField textField;
+	private static JFormattedTextField textField2;	
+	private static CardLayout cl = new CardLayout();
+	private static JPanel textPanel = new JPanel();
+	private static boolean showingLogin = true;
 	
 	public static LoginMenu getInstance() {
 		if (menu == null) {
@@ -50,11 +57,16 @@ public class LoginMenu extends JPanel {
 		title.setBounds(10, 11, 380, 99);
 		menu.add(title);
 		
+		textPanel.setLayout(cl);
+		textPanel.setBounds(99, 199, 202, 102);
+		menu.add(textPanel);
+		
+//		login panel contains all the buttons for logging in
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(null);
 		loginPanel.setBounds(100, 200, 200, 100);
-		loginPanel.setBackground(new Color(0, 0, 255));
-		menu.add(loginPanel);
+		loginPanel.setBackground(new Color(0, 255, 255));
+		textPanel.add(loginPanel, "LP");
 		
 		loginButton = new JButton("Login");
 		loginButton.setBounds(115, 15, 75, 20);
@@ -67,14 +79,46 @@ public class LoginMenu extends JPanel {
 		createProfile = new JButton("Create profile");
 		createProfile.setBounds(10, 45, 180, 20);
 		loginPanel.add(createProfile);
+		createProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(textPanel, "CP");
+				showingLogin = false;
+			}
+		});
+		
+//		create panel contains all the buttons for creating a new profile
+		JPanel createPanel = new JPanel();
+		createPanel.setLayout(null);
+		createPanel.setBounds(100, 200, 200, 100);
+		textPanel.add(createPanel, "CP");
+		
+		createButton = new JButton("Create");
+		createButton.setBounds(115, 15, 75, 20);
+		createPanel.add(createButton);
+		
+		textField2 = new JFormattedTextField();
+		textField2.setBounds(10, 15, 100, 20);
+		createPanel.add(textField2);
+		
+		loginProfile = new JButton("Use existing profile");
+		loginProfile.setBounds(10, 45, 180, 20);
+		createPanel.add(loginProfile);
+		loginProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(textPanel, "LP");
+				showingLogin = true;
+			}
+		});
+		
+		cl.show(textPanel, "LP");
 	}
 	
-	public void setSelectButton(ActionListener action) {
+	public void setLoginButton(ActionListener action) {
 		loginButton.addActionListener(action);
 	}
 	
-	public void setCreateProfileButton(ActionListener action) {
-		createProfile.addActionListener(action);
+	public void setCreateButton(ActionListener action) {
+		createButton.addActionListener(action);
 	}
 	
 	public void setSelectButtonText(String str) {
@@ -86,6 +130,11 @@ public class LoginMenu extends JPanel {
 	}
 	
 	public String getProfileName() {
-		return textField.getText();
+		if (showingLogin) {
+			return textField.getText();
+		}
+		else {
+			return textField2.getText();
+		}
 	}
 }
