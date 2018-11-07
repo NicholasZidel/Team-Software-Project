@@ -44,6 +44,7 @@ public class GameMenu extends JPanel{
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	static TicTacToeGame ttt = null;
 	private static void initialize() {
 		
 		panel.setLayout(new BorderLayout(0, 0));
@@ -89,9 +90,11 @@ public class GameMenu extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				//DP.setVisible(true);
 				//cl.show(cardPanel, "DP");
-
-				TicTacToeGame ttt = new TicTacToeGame();
-				ttt.createFrame();							//runs tictactoe game
+				
+				if (ttt == null) {
+					ttt = new TicTacToeGame();
+					ttt.createFrame();							//runs tictactoe game
+				}
 
 			}
 		});
