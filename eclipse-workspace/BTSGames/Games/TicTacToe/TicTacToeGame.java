@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import display.Driver;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -28,6 +31,7 @@ public class TicTacToeGame {
 	private int[] buttonPosition;
 	private AI computer;
 	private int gameEnd;
+	private DifficultyPanel Dp;
 
 	/**
 	 * Launch the application.
@@ -226,6 +230,7 @@ public class TicTacToeGame {
 		if (currentTurn == 0) {
 			winStatement.setText("YOU WIN!!");
 			winStatement.setVisible(true);
+			Driver.currentUser.updateScore("TicTacToe");
 		} else {
 			winStatement.setText("YOU LOSE");
 			winStatement.setVisible(true);
@@ -284,7 +289,7 @@ public class TicTacToeGame {
 		
 		
 		//-------------------------------------------------------------------------------
-		DifficultyPanel Dp = DifficultyPanel.getInstance();
+		Dp = DifficultyPanel.getInstance();
 		Dp.setVisible(true);
 		frmTicTacToe.getContentPane().add(Dp);
 		
@@ -546,5 +551,57 @@ public class TicTacToeGame {
 		panel.add(winStatement);
 
 	}
+	
+	//button pressing methods for testing
+	public void button1press() {
+		Button1.doClick();
+	}
 
+	public void button2press() {
+		Button2.doClick();
+	}
+	
+	public void button3press() {
+		Button3.doClick();
+	}
+	
+	public void button4press() {
+		Button4.doClick();
+	}
+	
+	public void button5press() {
+		Button5.doClick();
+	}
+	
+	public void button6press() {
+		Button6.doClick();
+	}
+	
+	public void button7press() {
+		Button7.doClick();
+	}
+	
+	public void button8press() {
+		Button8.doClick();
+	}
+	
+	public void button9press() {
+		Button9.doClick();
+	}
+	
+	public void EButtonPress() {
+		Dp.pressE();
+	}
+	
+	public void NButtonPress() {
+		Dp.pressN();
+	}
+	
+	public void HButtonPress() {
+		Dp.pressH();
+	}
+	
+	public int[][] getBoard() {
+		return board;
+	}
 }
