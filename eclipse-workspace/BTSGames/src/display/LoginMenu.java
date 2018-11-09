@@ -65,7 +65,7 @@ public class LoginMenu extends JPanel {
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(null);
 		loginPanel.setBounds(100, 200, 200, 100);
-		loginPanel.setBackground(new Color(0, 255, 255));
+//		loginPanel.setBackground(new Color(0, 255, 255));
 		textPanel.add(loginPanel, "LP");
 		
 		loginButton = new JButton("Login");
