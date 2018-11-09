@@ -32,7 +32,7 @@ public class Driver {
 	private static GameMenu GM = GameMenu.getInstance();
 	private static StatisticsMenu SM = StatisticsMenu.getInstance();
 	private static Poppup pop = Poppup.getInstance();
-	private static Profile currentUser;
+	public static Profile currentUser;
 	boolean login = true;
 	private static CardLayout cl = new CardLayout();
 	private static ActionListener loginAction;

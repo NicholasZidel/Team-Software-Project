@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import display.Driver;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -226,6 +229,7 @@ public class TicTacToeGame {
 		if (currentTurn == 0) {
 			winStatement.setText("YOU WIN!!");
 			winStatement.setVisible(true);
+			Driver.currentUser.updateScore("TicTacToe");
 		} else {
 			winStatement.setText("YOU LOSE");
 			winStatement.setVisible(true);
