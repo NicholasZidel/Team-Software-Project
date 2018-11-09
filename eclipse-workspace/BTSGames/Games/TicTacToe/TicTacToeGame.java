@@ -221,8 +221,9 @@ public class TicTacToeGame {
 		}
 		
 		if (gameEnd == 9) {
-			winStatement.setText("TIE GAME");
-			winStatement.setVisible(true);
+			//winStatement.setText("TIE GAME");
+			//winStatement.setVisible(true);
+			Popup.createPopup(3);		
 			endGame();
 			return;
 		}
@@ -231,18 +232,16 @@ public class TicTacToeGame {
 	private void win(int currentRow, int currentTurn) {
 		//passing current row for ability to mark where win was
 		if (currentTurn == 0) {
-			winStatement.setText("YOU WIN!!");
-			winStatement.setVisible(true);
+			//winStatement.setText("YOU WIN!!");
+			//winStatement.setVisible(true);
+			Popup.createPopup(1);
 			Driver.currentUser.updateScore("TicTacToe");
 		} else {
-			winStatement.setText("YOU LOSE");
-			winStatement.setVisible(true);
+			//winStatement.setText("YOU LOSE");
+			//winStatement.setVisible(true);
+			Popup.createPopup(0);
 		}
 	}
-	
-//	public void windowCLosing(WindowEvent e) {
-//		GameMenu.resetTTT();
-//	}
 	
 	private void reset() {
 		Button1.setEnabled(true);
