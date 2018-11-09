@@ -84,5 +84,15 @@ public class DifficultyPanel  extends JPanel {
 		HButton.addActionListener(a);
 	}
 	
+	public void pressE() {
+		EButton.doClick();
+	}
 	
+	public void pressN() {
+		NButton.doClick();
+	}
+	
+	public void pressH() {
+		HButton.doClick();
+	}
 }
