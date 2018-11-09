@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import display.Driver;
+import display.GameMenu;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -17,6 +18,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
@@ -237,6 +240,10 @@ public class TicTacToeGame {
 		}
 	}
 	
+//	public void windowCLosing(WindowEvent e) {
+//		GameMenu.resetTTT();
+//	}
+	
 	private void reset() {
 		Button1.setEnabled(true);
 		Button2.setEnabled(true);
@@ -273,6 +280,13 @@ public class TicTacToeGame {
 		frmTicTacToe.setBounds(100, 100, 450, 300);
 		frmTicTacToe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+        frmTicTacToe.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	GameMenu.resetTTT();
+                //System.exit(0);
+            }
+        });
 
 		
 		JPanel panel = new JPanel();

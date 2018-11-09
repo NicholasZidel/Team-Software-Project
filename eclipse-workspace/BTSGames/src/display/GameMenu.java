@@ -41,10 +41,14 @@ public class GameMenu extends JPanel{
 	public GameMenu() {
 	}
 
+	static TicTacToeGame ttt = null;	
+	public static void resetTTT() {			
+		ttt = null;
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	static TicTacToeGame ttt = null;
 	private static void initialize() {
 		
 		panel.setLayout(new BorderLayout(0, 0));
@@ -86,6 +90,7 @@ public class GameMenu extends JPanel{
 		//DifficultyPanel DP = DifficultyPanel.getInstance();
 		//cardPanel.add(DP, "DP");
 		
+
 		DM.setPlayButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//DP.setVisible(true);
