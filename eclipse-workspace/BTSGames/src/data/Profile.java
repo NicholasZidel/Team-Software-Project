@@ -18,6 +18,7 @@ public class Profile {
 	
 	private String name;
 	private File playerFile;
+	private Buffer buffer = new Buffer();
 	
 	public Profile() {
 		
@@ -49,15 +50,22 @@ public class Profile {
 		return name;
 	}
 	
-	public void createDirFilePath() {
+	public boolean createDirFilePath() {
 		file = new File(dirPath);
-		if(!file.exists()) {
+		
+		boolean fileExists = !file.exists();
+		if(fileExists) {
 			file.mkdirs();
 		}
+		return fileExists;
 	}
 	
 	public String getJSONString() {
 		return jsonObject.toString();
+	}
+	
+	public JSONObject getJSONObject() {
+		return jsonObject;
 	}
 	
 	public String writeJSONFile() {
@@ -72,25 +80,34 @@ public class Profile {
 		return forFile;
 	}*/
 	
-	public void updateScore(String game) {
-		if(jsonObject.has(game)) {
+	public int updateScore(String game) {
+		gameKey = game;
+		int currentScore = 0;
+		//read file
+		jsonObject = buffer.readFileJSONObject(dirPath + name + ".json"); 
+		
+		if(jsonObject.has(gameKey)) {
 			try {
-				int currentScore = jsonObject.getInt(game);
-				jsonObject.put(game, currentScore + 1);
+				currentScore = jsonObject.getInt(gameKey);
+				jsonObject.put(gameKey, currentScore + 1);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
 		else {
 			try {
-				jsonObject.put(game, 1);
+				jsonObject.put(gameKey, 1);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		writeJSONFile();
+		return currentScore + 1;
 	}
 	
 	public int getScore(String game) {
+		jsonObject = buffer.readFileJSONObject(dirPath + name + ".json"); 
 		int score = 0;
 		try {
 			score = jsonObject.getInt(game);
