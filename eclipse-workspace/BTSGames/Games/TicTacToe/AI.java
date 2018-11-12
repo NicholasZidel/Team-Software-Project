@@ -17,6 +17,8 @@ public class AI {
 			return easy();
 		} else if (difficulty == 1) {
 			return normal();
+		} else  if (difficulty == 2) {
+			return hard();
 		} else {
 			return dead;
 		}
@@ -106,6 +108,60 @@ public class AI {
 					count++;
 				}
 				if (rows[i][j] == 2) {
+					count = 100;
+				}
+			}
+			if (count == 2) {
+				return aha(i);
+			}
+		}
+		return easy();
+	}
+	
+	private int[][] hard () {
+		ArrayList<Integer> possible = new ArrayList<Integer>();
+		/*
+		 * rows is a 2D array listing all the 3 row combinations in tic tac toe
+		 * rows 0-2 are columns 1-3
+		 * rows 3-5 are rows 1-3
+		 * row 6 is diagonal from upper left to lower right
+		 * row 7 is diagonal from upper right to lower left
+		 */
+		int[][] rows = new int[8][3];
+		
+		//fills the row 2d array with proper places
+		int count = 0;
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				rows[i][j] = board[j][count];
+			}
+			count++;
+		}
+		count = 0;
+		for(int i = 3; i < 6; i++) {
+			for (int j = 0; j < 3; j++) {
+				rows[i][j] = board[count][j];
+			}
+			count++;
+		}
+		count = 0;
+		for (int i = 0; i < 3; i++) {
+			rows[6][i] = board[count][i];
+			count++;
+		}
+		count = 2;
+		for (int i = 0; i < 3; i++) {
+			rows[7][i] = board[count][i];
+			count--;
+		}
+		//checks to see if computer has two in a row and then plays in that row
+		for (int i = 0; i < 8; i++) {
+			count = 0;
+			for (int j = 0; j < 3; j++) {
+				if (rows[i][j] == 2) {
+					count++;
+				}
+				if (rows[i][j] == 1) {
 					count = 100;
 				}
 			}

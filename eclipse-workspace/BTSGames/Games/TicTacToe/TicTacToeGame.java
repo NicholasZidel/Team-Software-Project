@@ -333,7 +333,7 @@ public class TicTacToeGame {
 		Dp.setHButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dp.setVisible(false);
-				computer = new AI(1);
+				computer = new AI(2);
 				frmTicTacToe.getContentPane().remove(Dp);
 				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
 			}
