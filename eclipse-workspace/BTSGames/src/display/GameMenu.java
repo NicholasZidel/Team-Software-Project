@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Hangman.HMDemoMenu;
 import TicTacToe.DemoMenu;
 import TicTacToe.DifficultyPanel;
 import TicTacToe.TicTacToeGame;
@@ -85,6 +87,9 @@ public class GameMenu extends JPanel{
 		
 		DemoMenu DM = DemoMenu.getInstance();
 		cardPanel.add(DM, "DM");
+		
+		HMDemoMenu HMM = HMDemoMenu.getInstance();
+		cardPanel.add(HMM, "HMM");
 		
 		//------------------------------------------------------------------------
 		//DifficultyPanel DP = DifficultyPanel.getInstance();
