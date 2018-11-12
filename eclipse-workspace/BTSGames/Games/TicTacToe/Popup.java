@@ -74,6 +74,7 @@ public class Popup {
 		Label.setFont(new Font("Ravie", Font.PLAIN, 21));
 		Label.setMinimumSize(new Dimension(150, 75));
 		panel.add(Label);
+		frame.setResizable(false);
 		frame.setBounds(200, 200, 200, 80);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
