@@ -169,7 +169,7 @@ public class AI {
 				return aha(i);
 			}
 		}
-		return easy();
+		return normal();
 	}
 	
 	private int[][] aha (int row) {
