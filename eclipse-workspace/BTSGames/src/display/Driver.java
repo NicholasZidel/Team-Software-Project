@@ -38,13 +38,12 @@ public class Driver {
 	private static ActionListener loginAction;
 	private static ActionListener createAction;
 	
-	public void createWorld() {
+	public void createWorld(Driver drive) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Driver window = new Driver();
-					window.frame.setVisible(true);
+					drive.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -161,6 +160,8 @@ public class Driver {
 				if (!setProfileWhenSelectButtonClicked()) {
 					currentUser = new Profile(LM.getProfileName());
 					currentUser.writeJSONFile();
+					MM.setLoggedInAsName(currentUser.getName());
+					cl.show(frame.getContentPane(), "MM");
 				}
 				else {
 					frame.setEnabled(false);
