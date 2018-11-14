@@ -19,6 +19,7 @@ import Hangman.HMDemoMenu;
 import Minesweeper.MSDemoMenu;
 import TicTacToe.DemoMenu;
 import TicTacToe.DifficultyPanel;
+import TicTacToe.TTTTutorial;
 import TicTacToe.TicTacToeGame;
 
 public class GameMenu extends JPanel{
@@ -91,6 +92,12 @@ public class GameMenu extends JPanel{
 					ttt.createFrame();							//runs tictactoe game
 				}
 
+			}
+		});
+		
+		DM.setTutorialButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TTTTutorial.main(null);
 			}
 		});
 		//------------------------------------------------------------------------
