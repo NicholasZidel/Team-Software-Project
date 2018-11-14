@@ -56,14 +56,14 @@ public class Tile {
 	
 //--------Setters--------------------------------------------------------------------------
 	
-	public void setNorth(Tile n) {north = n; north.setSouth(this);}
-	public void setSouth(Tile s) {south = s; south.setNorth(this);}
-	public void setEast(Tile e) {east = e; east.setWest(this);}
-	public void setWest(Tile w) {west = w; west.setEast(this);}
-	public void setNorthEast(Tile ne) {northEast = ne; northEast.setSouthWest(this);}
-	public void setNorthWest(Tile nw) {northWest = nw; northWest.setSouthEast(this);}
-	public void setSouthEast(Tile se) {southEast = se; southEast.setNorthWest(this);}
-	public void setSouthWest(Tile sw) {southWest = sw; southWest.setNorthEast(this);}
+	public void setNorth(Tile n) {north = n;}
+	public void setSouth(Tile s) {south = s;}
+	public void setEast(Tile e) {east = e;}
+	public void setWest(Tile w) {west = w;}
+	public void setNorthEast(Tile ne) {northEast = ne;}
+	public void setNorthWest(Tile nw) {northWest = nw;}
+	public void setSouthEast(Tile se) {southEast = se;}
+	public void setSouthWest(Tile sw) {southWest = sw;}
 	public void setType(int t) {type = t;}
 	
 //----------------------------------------------------------------------------------------
