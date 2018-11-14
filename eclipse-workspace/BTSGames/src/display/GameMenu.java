@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import Hangman.HMDemoMenu;
+import Minesweeper.MSDemoMenu;
 import TicTacToe.DemoMenu;
 import TicTacToe.DifficultyPanel;
 import TicTacToe.TicTacToeGame;
@@ -66,30 +67,14 @@ public class GameMenu extends JPanel{
 		cardPanel.setLayout(cl);
 		panel.add(cardPanel, BorderLayout.CENTER);
 		
-		//First game panel demo
-		JPanel gamePanel = new JPanel();
-		cardPanel.add(gamePanel, "One");
-		gamePanel.setLayout(null);
-		
-		JLabel lblGameTitle = new JLabel("Game Title");
-		lblGameTitle.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblGameTitle.setBounds(77, 38, 159, 50);
-		gamePanel.add(lblGameTitle);
-		
-		JButton btnStart = new JButton("Start");
-		btnStart.setBounds(99, 188, 89, 23);
-		gamePanel.add(btnStart);
-		
-		JButton btnTutorial = new JButton("Tutorial");
-		btnTutorial.setBounds(99, 235, 89, 23);
-		gamePanel.add(btnTutorial);
-		//First game panel demo end
-		
 		DemoMenu DM = DemoMenu.getInstance();
 		cardPanel.add(DM, "DM");
 		
 		HMDemoMenu HMM = HMDemoMenu.getInstance();
 		cardPanel.add(HMM, "HMM");
+		
+		MSDemoMenu MSM = MSDemoMenu.getInstance();
+		cardPanel.add(MSM, "MSM");
 		
 		//------------------------------------------------------------------------
 		//DifficultyPanel DP = DifficultyPanel.getInstance();
