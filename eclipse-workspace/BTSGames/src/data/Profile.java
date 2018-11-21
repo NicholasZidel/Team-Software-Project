@@ -45,7 +45,7 @@ public class Profile {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -53,8 +53,8 @@ public class Profile {
 	public boolean createDirFilePath() {
 		file = new File(dirPath);
 		
-		boolean fileExists = !file.exists();
-		if(fileExists) {
+		boolean fileExists = file.exists();
+		if(!fileExists) {
 			file.mkdirs();
 		}
 		return fileExists;
@@ -103,6 +103,7 @@ public class Profile {
 		}
 		
 		writeJSONFile();
+		//update leaderboard...
 		return currentScore + 1;
 	}
 	

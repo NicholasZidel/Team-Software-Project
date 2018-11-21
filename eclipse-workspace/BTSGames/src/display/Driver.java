@@ -142,6 +142,7 @@ public class Driver {
 	}
 	
 	private void loginButtonSetup() {
+		System.out.println("hello");
 		LM.setLoginButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (setProfileWhenSelectButtonClicked()) {
@@ -157,14 +158,16 @@ public class Driver {
 		
 		LM.setCreateButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(setProfileWhenSelectButtonClicked());
 				if (!setProfileWhenSelectButtonClicked()) {
 					currentUser = new Profile(LM.getProfileName());
 					currentUser.writeJSONFile();
+					//proceed to game menu
+					return;
 				}
 				else {
 					frame.setEnabled(false);
 					pop.showARE();
+					//stop. retry login.
 				}
 			}
 		});

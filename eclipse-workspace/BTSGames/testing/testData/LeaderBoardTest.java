@@ -12,11 +12,12 @@ class LeaderBoardTest {
 	@Test
 	void updateTest() {
 		LeaderBoard leaderBoard = new LeaderBoard();
-		Profile profile = new Profile();
+		Profile profile = new Profile("John");
 		
-		leaderBoard.update("TicTacToe", "John", profile.getScore("TicTacToe"));
+		leaderBoard.update("TicTacToe", "John", 10);
+		
 		System.out.println(leaderBoard.getJSONString());
-		//assertEquals("{\"TicTacToe\":[{\"HighScore\":0},{\"Name\":\"John\"}]}", leaderBoard.getJSONString());
+		//assertEquals("{\"TicTacToe\":[{\"HighScore\":" + score + "},{\"Name\":\"John\"}]}", leaderBoard.getJSONString());
 	}
 
 }

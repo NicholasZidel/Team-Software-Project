@@ -2,6 +2,7 @@ package data;
 
 import java.io.File;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,19 +13,36 @@ public class LeaderBoard {
 	private String filePath = "Output/LeaderBoard.json";
 	private File file;
 	private Buffer buffer = new Buffer();
+	private static int scoreIndex = 0;
 	
 	private JSONObject jsonObject;
 	
 	public LeaderBoard() {
-		if( !(new File(filePath)).exists() ) {
+		if( !(new File(filePath).exists()) ) {
 			file = new File(filePath);
+			jsonObject = new JSONObject();
 		}
-		jsonObject = new JSONObject();
+		else {
+			jsonObject = getJSONObjectFromFile();
+		}
 	}
-	
+	/*
 	public LeaderBoard(JSONObject jsonObject) {
 		super();
 		this.jsonObject = jsonObject;
+	}*/
+	
+	public JSONObject getJSONObjectFromFile() {
+		Buffer buffer = new Buffer();
+		String json = buffer.readFile(filePath);
+		JSONObject temp = null;
+		try {
+			temp = new JSONObject(json);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return temp;
 	}
 	
 	public void update(String game, String name, int score) {
@@ -38,10 +56,9 @@ public class LeaderBoard {
 			currentScoreJSON.put(highScoreKey, score);
 			
 			if( jsonObject.has(game) ) {
-				JSONObject highScoreJSON = (JSONObject)jsonObject.get(highScoreKey);
-				if( score > highScoreJSON.getDouble(highScoreKey) ) {
-					jsonObject.put(game, currentScoreJSON);
-					jsonObject.accumulate(game, currentNameJSON);
+				JSONObject highScore = (JSONObject)((JSONArray)jsonObject.get(game)).get(scoreIndex);
+				if( score > highScore.getInt(highScoreKey) ) {
+					highScore.put(highScoreKey, score);
 				}
 			} else {
 				jsonObject.put(game, currentScoreJSON);
@@ -51,7 +68,7 @@ public class LeaderBoard {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//buffer.writeFile(jsonObject.toString(), file.getPath());
+		buffer.writeFile(jsonObject.toString(), filePath);
 	}
 	
 	
