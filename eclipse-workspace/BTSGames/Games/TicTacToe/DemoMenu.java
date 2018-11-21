@@ -24,6 +24,7 @@ public class DemoMenu extends JPanel {
 	
 	private static DemoMenu panel = null;
 	private static JButton btnPlay = null;
+	private static JButton btnTutorial = null;
 	
 	public static DemoMenu getInstance() {
 		
@@ -60,7 +61,7 @@ public class DemoMenu extends JPanel {
 		btnPlay.setBounds(95, 150, 120, 30);
 		panel.add(btnPlay);
 		
-		JButton btnTutorial = new JButton("Tutorial");
+		btnTutorial = new JButton("Tutorial");
 		btnTutorial.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
 		btnTutorial.setForeground(Color.BLACK);
 		btnTutorial.setBackground(Color.BLUE);
@@ -73,6 +74,9 @@ public class DemoMenu extends JPanel {
 	//------------------------------------------------------------------------
 	public void setPlayButton(ActionListener a) {
 		btnPlay.addActionListener(a);
+	}
+	public void setTutorialButton(ActionListener a) {
+		btnTutorial.addActionListener(a);
 	}
 	//------------------------------------------------------------------------
 	

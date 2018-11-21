@@ -86,7 +86,9 @@ public class TicTacToeGame {
 		board2[buttonPosition[0]][buttonPosition[1]] = 1;
 		b.setText("X");
 		gameEnd++;
-		checkWin(0);
+		 if (checkWin(0)) {
+			 return;
+		 }
 		if (gameEnd == 9) {
 			return;
 		}
@@ -136,7 +138,9 @@ public class TicTacToeGame {
 			}
 		}
 		gameEnd++;
-		checkWin(1);
+		if (checkWin(1)) {
+			return;
+		}
 	}
 	
 	private void endGame() {
@@ -152,7 +156,7 @@ public class TicTacToeGame {
 	}
 	
 	//add ability to updated profile later
-	private void checkWin(int currentTurn) {
+	private boolean checkWin(int currentTurn) {
 		/*
 		 * rows is a 2D array listing all the 3 row combinations in tic tac toe
 		 * rows 0-2 are columns 1-3
@@ -207,14 +211,14 @@ public class TicTacToeGame {
 				if (rows[i][0] == 1 && rows[i][1] == 1 && rows[i][2] == 1) {
 					win(i, 0);
 					endGame();
-					return;
+					return true;
 				}
 			}
 			if (rowCheck == 3) {
 				if (rows[i][0] == 2 && rows[i][1] == 2 && rows[i][2] == 2) {
 					win(i, 1);
 					endGame();
-					return;
+					return true;
 				}
 			}
 			rowCheck = 0;
@@ -225,8 +229,10 @@ public class TicTacToeGame {
 			//winStatement.setVisible(true);
 			Popup.createPopup(3);		
 			endGame();
-			return;
+			return true;
 		}
+		
+		return false;
 	}
 	
 	private void win(int currentRow, int currentTurn) {
@@ -327,7 +333,7 @@ public class TicTacToeGame {
 		Dp.setHButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dp.setVisible(false);
-				computer = new AI(1);
+				computer = new AI(2);
 				frmTicTacToe.getContentPane().remove(Dp);
 				frmTicTacToe.getContentPane().add(panel, BorderLayout.CENTER);
 			}
