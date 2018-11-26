@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import Centipede.CDemoMenu;
 import Hangman.HMDemoMenu;
 import Hangman.HangmanGame;
 import Minesweeper.MSDemoMenu;
@@ -79,6 +80,9 @@ public class GameMenu extends JPanel{
 		
 		MSDemoMenu MSM = MSDemoMenu.getInstance();
 		cardPanel.add(MSM, "MSM");
+		
+		CDemoMenu CDM = CDemoMenu.getInstance();
+		cardPanel.add(CDM, "CDM");
 		
 		//------------------------------------------------------------------------
 		HMDemoMenu HMM = HMDemoMenu.getInstance();
