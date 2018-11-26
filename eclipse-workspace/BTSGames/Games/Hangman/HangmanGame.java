@@ -13,16 +13,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.SwingConstants;
+
+import display.GameMenu;
+
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class HangmanGame {
 
+	HangmanAI ai = new HangmanAI();  
 	private JFrame frame;
 	private MyGraphics panel;
 
@@ -62,15 +68,26 @@ public class HangmanGame {
 	 * Create the application.
 	 */
 	public HangmanGame() {
+		resetMan();
 		initialize();
+
 	}
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
+	public void resetMan() {
+		head = false;
+		body = false;
+		Rarm = false;
+		Larm = false;
+		Rleg = false;
+		Lleg = false;
+	}
 	
 	//-----------------------------------------------------------------------------------------
 	//Graphics for hangman
+	
+	public boolean head, body, Rarm, Larm, Rleg, Lleg;		
 	MyGraphics hangmanGraphics = new MyGraphics();
+	
     public class MyGraphics extends JPanel{
         private static final long serialVersionUID = 1L;
 
@@ -87,23 +104,38 @@ public class HangmanGame {
     		g2d.fillRect(50, 150, 70, 10); 				//base horizontal
     		g2d.fillRect(75, 50 , 10, 100);				//base vertical
     		g2d.fillRect(75, 50, 75, 10);					//base top horizontal
-    		g2d.drawOval(130, 60, 20, 20); 			//head
-    		g2d.drawLine(140, 80, 140, 112);		//body
-    		g2d.drawLine(140, 85, 120, 108);		//left arm
-    		g2d.drawLine(140, 85, 160, 108);		//right arm
-    		g2d.drawLine(140, 112, 150, 135 );	//right leg
-    		g2d.drawLine(140, 112, 130, 135 );	// left leg
+    		if (head)
+    			g2d.drawOval(130, 60, 20, 20); 			//head
+    		if (body)
+    			g2d.drawLine(140, 80, 140, 112);		//body
+    		if (Larm)
+    			g2d.drawLine(140, 85, 120, 108);		//left arm
+    		if (Rarm)
+    			g2d.drawLine(140, 85, 160, 108);		//right arm
+    		if (Rleg)
+    			g2d.drawLine(140, 112, 150, 135 );	//right leg
+    		if (Lleg)
+    			g2d.drawLine(140, 112, 130, 135 );	// left leg
     		
         }
     }
 	//-----------------------------------------------------------------------------------------
-    
+	static JLabel promptLabel, wordLabel, txtLabel;
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Hangman");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	GameMenu.resetHM();
+                //System.exit(0);
+            }
+        });
 		
 		panel = new MyGraphics();
 		panel.setMinimumSize(new Dimension(400, 400));
@@ -118,15 +150,15 @@ public class HangmanGame {
 		lblHangman.setBounds(154, 0, 114, 38);
 		panel.add(lblHangman);
 		
-		JLabel promptLabel = new JLabel("promt");
+		promptLabel = new JLabel("promt");
 		promptLabel.setBounds(302, 59, 118, 35);
 		panel.add(promptLabel);
 		
-		JLabel txtLabel = new JLabel("user text");
+		txtLabel = new JLabel("user text");
 		txtLabel.setBounds(302, 107, 75, 25);
 		panel.add(txtLabel);
 		
-		JLabel wordLabel = new JLabel("game word");
+		wordLabel = new JLabel("game word");
 		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		wordLabel.setBounds(25, 175, 352, 25);
 		panel.add(wordLabel);
@@ -136,10 +168,21 @@ public class HangmanGame {
 		replayButton.setForeground(Color.MAGENTA);
 		replayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ai.wordPlacer();
 			}
 		});
 		replayButton.setBounds(280, 213, 97, 25);
 		panel.add(replayButton);
+	}
+	
+	public static void setPromt(String prompt) {
+		promptLabel.setText(prompt);
+	}
+	public static void setTxt(String usertxt) {
+		txtLabel.setText(usertxt);
+	}
+	public static void setWord(String word) {
+		wordLabel.setText(word);
 	}
 	
 }

@@ -45,7 +45,8 @@ public class GameMenu extends JPanel{
 	 */
 	public GameMenu() {
 	}
-
+	//-------------------------------------------------------------------
+	//makes sure you can only open once at a time per game
 	static TicTacToeGame ttt = null;	
 	public static void resetTTT() {			
 		ttt = null;
@@ -54,7 +55,7 @@ public class GameMenu extends JPanel{
 	public static void resetHM() {
 		hm = null;
 	}
-	
+	//-------------------------------------------------------------------
 	/**
 	 * Initialize the contents of the frame.
 	 */
