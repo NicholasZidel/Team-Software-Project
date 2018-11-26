@@ -71,7 +71,6 @@ public class Driver {
 			JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
 			//create the instance using jsonObject 
 			currentUser = new Profile(jsonObject);
-			System.out.println("I got here somehow");
 			return true;
 		}
 		return false;

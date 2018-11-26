@@ -6,12 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JTextArea;
 
 public class TTTTutorial {
 
 	private JFrame frame;
-
+	private static TTTTutorial window;
 	/**
 	 * Launch the application.
 	 */
@@ -19,8 +22,10 @@ public class TTTTutorial {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TTTTutorial window = new TTTTutorial();
-					window.frame.setVisible(true);
+					if (window == null) {
+						window = new TTTTutorial();
+						window.frame.setVisible(true);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,6 +49,12 @@ public class TTTTutorial {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
+		frame.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					window = null;
+			}
+		});
 		
 		JTextArea txtrTheObjectOf = new JTextArea();
 		txtrTheObjectOf.setText("The object of the game is to get three\r\n of your shape in a row on the board.\r\nThe two players (You and the computer)\r\n take turns playing their shape\r\n(you are X computer is O). You cannot \r\nplay on already played on squares.\r\nGame is a tie if all squares are filled \r\nand neither player wins.");

@@ -11,6 +11,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -38,6 +40,7 @@ public class HMDemoMenu extends JPanel {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	static JButton btnPlay;
 	private static void initialize() {
 
 		
@@ -52,7 +55,7 @@ public class HMDemoMenu extends JPanel {
 		lblHangman.setBounds(71, 13, 167, 44);
 		panel.add(lblHangman);
 		
-		JButton btnPlay = new JButton("Play");
+		btnPlay = new JButton("Play");
 		btnPlay.setBackground(new Color(128, 0, 0));
 		btnPlay.setForeground(new Color(154, 205, 50));
 		btnPlay.setBounds(106, 144, 97, 25);
@@ -63,6 +66,10 @@ public class HMDemoMenu extends JPanel {
 		btnTutorial.setForeground(new Color(154, 205, 50));
 		btnTutorial.setBounds(106, 182, 97, 25);
 		panel.add(btnTutorial);
+	}
+	
+	public void setPlayButton(ActionListener a) {
+		btnPlay.addActionListener(a);
 	}
 
 }
