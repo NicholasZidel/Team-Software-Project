@@ -71,7 +71,6 @@ public class Driver {
 			JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
 			//create the instance using jsonObject 
 			currentUser = new Profile(jsonObject);
-			System.out.println("I got here somehow");
 			return true;
 		}
 		return false;
@@ -156,7 +155,6 @@ public class Driver {
 		
 		LM.setCreateButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(setProfileWhenSelectButtonClicked());
 				if (!setProfileWhenSelectButtonClicked()) {
 					currentUser = new Profile(LM.getProfileName());
 					currentUser.writeJSONFile();
