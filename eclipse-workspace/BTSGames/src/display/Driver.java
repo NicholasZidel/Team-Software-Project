@@ -97,6 +97,8 @@ public class Driver {
 		MM.setStatisticsButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl.show(frame.getContentPane(), "SM");
+				//need to display statistics
+				SM.displayData();
 			}
 		});
 		

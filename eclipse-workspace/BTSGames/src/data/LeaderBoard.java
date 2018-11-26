@@ -14,6 +14,7 @@ public class LeaderBoard {
 	private File file;
 	private Buffer buffer = new Buffer();
 	private static int scoreIndex = 0;
+	private static int nameIndex = 1;
 	
 	private JSONObject jsonObject;
 	
@@ -57,8 +58,10 @@ public class LeaderBoard {
 			
 			if( jsonObject.has(game) ) {
 				JSONObject highScore = (JSONObject)((JSONArray)jsonObject.get(game)).get(scoreIndex);
+				JSONObject leaderName = (JSONObject)((JSONArray)jsonObject.get(game)).get(nameIndex);
 				if( score > highScore.getInt(highScoreKey) ) {
 					highScore.put(highScoreKey, score);
+					leaderName.put(nameKey, name);
 				}
 			} else {
 				jsonObject.put(game, currentScoreJSON);
@@ -69,6 +72,10 @@ public class LeaderBoard {
 			e.printStackTrace();
 		}
 		buffer.writeFile(jsonObject.toString(), filePath);
+		
+		//need to trigger the statistics menu
+		//read the file
+		
 	}
 	
 	

@@ -2,6 +2,7 @@ package display;
 import java.awt.EventQueue;
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -97,7 +98,7 @@ public class GameMenu extends JPanel{
 		
 		DM.setTutorialButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TTTTutorial.main(null);
+				//TTTTutorial.main(null);
 			}
 		});
 		//------------------------------------------------------------------------

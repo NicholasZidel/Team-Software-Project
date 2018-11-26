@@ -79,6 +79,9 @@ public class StatisticsMenu extends JPanel {
 		btnReturnButton.setBounds(130, 350, 140, 35);
 		statsPanel.add(btnReturnButton);
 		
+		
+		//text fields that will be updated
+		//parse json file row by row
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setBounds(0, 77, 70, 261);
@@ -102,6 +105,10 @@ public class StatisticsMenu extends JPanel {
 		textField_3.setBounds(267, 77, 124, 261);
 		statsPanel.add(textField_3);
 		textField_3.setColumns(10);
+	}
+	
+	public void displayData() {
+		//System.out.println("hello");
 	}
 	
 	public void setReturnButton(ActionListener action) {
