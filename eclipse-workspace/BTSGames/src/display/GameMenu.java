@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import Hangman.HMDemoMenu;
+import Hangman.HangmanGame;
 import Minesweeper.MSDemoMenu;
 import TicTacToe.DemoMenu;
 import TicTacToe.DifficultyPanel;
@@ -49,6 +50,10 @@ public class GameMenu extends JPanel{
 	public static void resetTTT() {			
 		ttt = null;
 	}
+	static HangmanGame hm = null;
+	public static void resetHM() {
+		hm = null;
+	}
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -71,11 +76,25 @@ public class GameMenu extends JPanel{
 		DemoMenu DM = DemoMenu.getInstance();
 		cardPanel.add(DM, "DM");
 		
+		MSDemoMenu MSM = MSDemoMenu.getInstance();
+		cardPanel.add(MSM, "MSM");
+		
+		//------------------------------------------------------------------------
 		HMDemoMenu HMM = HMDemoMenu.getInstance();
 		cardPanel.add(HMM, "HMM");
 		
-		MSDemoMenu MSM = MSDemoMenu.getInstance();
-		cardPanel.add(MSM, "MSM");
+		HMM.setPlayButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//DP.setVisible(true);
+				//cl.show(cardPanel, "DP");
+				
+				if (hm == null) {
+					hm = new HangmanGame();
+					hm.createHangman();							//runs tictactoe game
+				}
+
+			}
+		});
 		
 		//------------------------------------------------------------------------
 		//DifficultyPanel DP = DifficultyPanel.getInstance();
