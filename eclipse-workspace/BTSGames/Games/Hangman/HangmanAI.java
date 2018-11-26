@@ -39,6 +39,7 @@ public class HangmanAI
 		return newWord;
 	}
 
+	//------------------------------------------------------------------------------------------------------Done
 	private static void wordFinder() 
 	{
 		int num = (int) (Math.random()*len);
@@ -61,6 +62,10 @@ public class HangmanAI
 		}
 	}
 	//------------------------------------------------------------------------------------------------------
+	
+	public void start() {
+		
+	}
 	private static void letterPlacer() 
 	{
 		Scanner kb = new Scanner(System.in);
