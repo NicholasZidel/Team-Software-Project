@@ -68,9 +68,8 @@ public class HangmanGame {
 	 * Create the application.
 	 */
 	public HangmanGame() {
-		resetMan();
+		//resetMan();
 		initialize();
-
 	}
 
 	public void resetMan() {
@@ -160,15 +159,18 @@ public class HangmanGame {
 		
 		wordLabel = new JLabel("game word");
 		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		wordLabel.setFont(new Font("Sitka Subheading", Font.PLAIN, 23));
 		wordLabel.setBounds(25, 175, 352, 25);
 		panel.add(wordLabel);
 		
-		JButton replayButton = new JButton("Play Again");
+		JButton replayButton = new JButton("Play");
 		replayButton.setBackground(Color.BLACK);
 		replayButton.setForeground(Color.MAGENTA);
 		replayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				resetMan();
 				ai.wordPlacer();
+				ai.start();
 			}
 		});
 		replayButton.setBounds(280, 213, 97, 25);

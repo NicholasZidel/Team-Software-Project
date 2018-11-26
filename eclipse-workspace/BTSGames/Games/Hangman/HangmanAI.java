@@ -47,9 +47,12 @@ public class HangmanAI
 		//wordPlacer();
 	}
 	
+	//------------------------------------------------------------------------------------------------------Done
 	void wordPlacer() 
 	{
 		String w = "";
+		int num = (int) (Math.random()*len); //picks a random word
+		theWord = words[num];
 		for(int i = 0; i < theWord.length(); i++)
 		{
 			w = w + "-";
@@ -57,6 +60,7 @@ public class HangmanAI
 			HangmanGame.setWord(w);
 		}
 	}
+	//------------------------------------------------------------------------------------------------------
 	private static void letterPlacer() 
 	{
 		Scanner kb = new Scanner(System.in);
