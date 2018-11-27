@@ -36,7 +36,7 @@ public class HangmanGame {
 	static int x = 0;
 	static int len = words.length;
 	static String  theWord;
-	
+	static boolean submitAllow = false;
 	static String  newWord = "";
 	static String replaceWord = "-";
 	private JFrame frame;
@@ -80,6 +80,7 @@ public class HangmanGame {
 		promptLabel.setText("Enter a Letter");
 		wordPlacer();
 		newWord = wordPlacer2();
+		submitAllow = false;
 	}
 	
 	public void wordPlacer() {
@@ -141,18 +142,18 @@ public class HangmanGame {
 		lblHangman.setBounds(154, 0, 114, 38);
 		panel.add(lblHangman);
 		
-		promptLabel = new JLabel("prompt");
+		promptLabel = new JLabel("Click Play!");
 		promptLabel.setBounds(302, 59, 118, 35);
 		panel.add(promptLabel);
 		
-		txtLabel = new JTextField("user text");
+		txtLabel = new JTextField(" Input");
 		txtLabel.setBounds(302, 107, 75, 25);
 		panel.add(txtLabel);
 		
 		wordLabel = new JLabel("game word");
 		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font("Sitka Subheading", Font.PLAIN, 23));
-		wordLabel.setBounds(25, 175, 352, 25);
+		wordLabel.setFont(new Font("monospace", Font.PLAIN, 28));
+		wordLabel.setBounds(25, 175, 352, 35);
 		panel.add(wordLabel);
 		
 		JButton submit = new JButton(">");
@@ -163,8 +164,11 @@ public class HangmanGame {
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (submitAllow == true) {	
+					if (txtLabel.getText().equals("") || txtLabel.getText().equals(" "))
+						return;
 				letter = txtLabel.getText().charAt(0);
-				//System.out.println("theWord: " + theWord + "  newWord: " + newWord);
+				System.out.println("theWord1: " + theWord + "  newWord: " + newWord);
 				promptLabel.setText("Enter a Letter");
 				x = 0;
 				for (int i = 0; i < theWord.length(); i++) {
@@ -173,7 +177,8 @@ public class HangmanGame {
 						x = 1;
 					}
 				}
-				System.out.println("theWord: " + theWord + "   newWord: " + newWord);
+				txtLabel.setText("");
+				System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
 				wordLabel.setText(newWord);
 				if(x == 0) {
 					count++;
@@ -206,7 +211,7 @@ public class HangmanGame {
 						resetMan();
 						promptLabel.setText("Nice try!");
 					}
-					//hangmanGraphics.repaint();
+					hangmanGraphics.repaint();
 					
 					}
 				hangmanGraphics.repaint();
@@ -215,19 +220,21 @@ public class HangmanGame {
 					resetMan();
 					promptLabel.setText("Nice Job!");
 				}
+			  }
 			}
 		});
 		panel.add(submit);
 		
-		JButton replayButton = new JButton("Play");
+		JButton replayButton = new JButton("Play [reset]");
 		replayButton.setBackground(Color.BLACK);
 		replayButton.setForeground(Color.MAGENTA);
 		replayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resetMan();
+				submitAllow = true;
 			}
 		});
-		replayButton.setBounds(280, 213, 97, 25);
+		replayButton.setBounds(280, 213, 130, 25);
 		panel.add(replayButton);
 	}
 	
