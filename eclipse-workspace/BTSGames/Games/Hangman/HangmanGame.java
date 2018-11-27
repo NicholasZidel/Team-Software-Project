@@ -6,21 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.SwingConstants;
-
 import display.GameMenu;
-
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -28,7 +22,10 @@ import java.awt.event.ActionEvent;
 
 public class HangmanGame {
 
-	static String[] words = {"understand","computer","java", "jake", "amount", "hangman",
+	static String[] words = {"awkward", "bagpipes", "banjo", "bungler",  "croquet", "crypt", "dwarves", 
+			"fishhook", "fjord", "gazebo", "gypsy", "haiku", "haphazard", "hyphen", "ivory", "jazzy", "jiffy", "ostracize", 
+			"oxygen", "pajama", "yacht", 
+			"understand","computer","java", "jake", "amount", "hangman",
 			"destroy","caterpillar","specific","why","goat","quantum","juno","sacrifice",
 			"lemonade","theatre","rocket","faucet","contemporary","loser","college","amphitheatre",
 			"sloth","magical","mistake","stratosphere"};
@@ -90,7 +87,6 @@ public class HangmanGame {
 		for(int i = 0; i < theWord.length(); i++)
 		{
 			w = w + "-";
-			
 		}
 		wordLabel.setText(w);
 	}
