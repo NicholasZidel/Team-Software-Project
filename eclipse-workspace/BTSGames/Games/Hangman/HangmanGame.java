@@ -151,7 +151,7 @@ public class HangmanGame {
 		
 		wordLabel = new JLabel("game word");
 		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font("monospace", Font.PLAIN, 28));
+		wordLabel.setFont(new Font("courier", Font.PLAIN, 28));
 		wordLabel.setBounds(25, 175, 352, 35);
 		panel.add(wordLabel);
 		
