@@ -181,43 +181,39 @@ public class HangmanGame {
 				System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
 				wordLabel.setText(newWord);
 				if(x == 0) {
-					count++;
-					//System.out.print("strike " + count + ": ");
-					if (count == 1) {
-						setHead(true);
-						promptLabel.setText("strike " + count + ": ");
-					}
-					if (count == 2) {
-						setBody(true);
-						promptLabel.setText("strike " + count + ": ");
-					}
-					if (count == 3) {
-						setLarm(true);
-						promptLabel.setText("strike " + count + ": ");
-					}
-					if (count == 4) {
-						setRarm(true);
-						promptLabel.setText("strike " + count + ": ");
-					}
-					if (count == 5) {
-						setLleg(true);
-						promptLabel.setText("strike " + count + ": ");
-					}
-					if (count == 6) {
-						setRleg(true);
-						promptLabel.setText("strike " + count + ": ");
-					}
-					if (checkLoss(count)) {     								// if checkLoss is true, player has lost
-						resetMan();
+						count++;
+						//System.out.print("strike " + count + ": ");
+						if (count == 1) {
+							head = true;
+							promptLabel.setText("strike " + count + ": ");
+						}
+						if (count == 2) {
+						body = true;
+							promptLabel.setText("strike " + count + ": ");
+						}
+						if (count == 3) {
+							Larm = true;
+							promptLabel.setText("strike " + count + ": ");
+						}
+						if (count == 4) {
+							Rarm = true;
+							promptLabel.setText("strike " + count + ": ");
+						}
+						if (count == 5) {
+							Lleg = true;
+							promptLabel.setText("strike " + count + ": ");
+						}
+						if (count == 6) {
+							Rleg = true;
+							promptLabel.setText("strike " + count + ": ");
+						}
+						if (checkLoss(count)) {     								// if checkLoss is true, player has lost
 						promptLabel.setText("Nice try!");
-					}
-					hangmanGraphics.repaint();
-					
-					}
-				hangmanGraphics.repaint();
+						}
+				}
+				panel.repaint();
 				//check win
 				if (theWord.equals(wordLabel.getText())) {
-					resetMan();
 					promptLabel.setText("Nice Job!");
 				}
 			  }
@@ -231,6 +227,7 @@ public class HangmanGame {
 		replayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resetMan();
+				panel.repaint();
 				submitAllow = true;
 			}
 		});
@@ -250,8 +247,6 @@ public class HangmanGame {
 	MyGraphics hangmanGraphics = new MyGraphics();
 	
     public class MyGraphics extends JPanel{
-        private static final long serialVersionUID = 1L;
-
         MyGraphics() {
             setPreferredSize(new Dimension(400, 400));
         	//setOpaque(false);
@@ -280,24 +275,4 @@ public class HangmanGame {
         }
     }
     
-	//-----------------------------------------------------------------------------------------
-	public static void setHead(boolean b) { //head
-		head = b;
-	}
-	public static void setBody(boolean b) { //body
-		body = b;
-	}
-	public static void setLarm(boolean b) { //left arm
-		Larm = b;
-	}
-	public static void setRarm(boolean b) {//right arm
-		Rarm = b;
-	}
-	public static void setLleg(boolean b) { //left leg
-		Lleg = b;
-	}
-	public static void setRleg(boolean b) { //right leg
-		Rleg = b;
-	}
-	
 }
