@@ -77,6 +77,9 @@ public class HangmanGame {
 		newWord = "";
 		replaceWord = "-";
 		count = 0;
+		promptLabel.setText("Enter a Letter");
+		wordPlacer();
+		newWord = wordPlacer2();
 	}
 	
 	public void wordPlacer() {
@@ -161,7 +164,7 @@ public class HangmanGame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				letter = txtLabel.getText().charAt(0);
-				System.out.println("theWord: " + theWord + "  newWord: " + newWord);
+				//System.out.println("theWord: " + theWord + "  newWord: " + newWord);
 				promptLabel.setText("Enter a Letter");
 				x = 0;
 				for (int i = 0; i < theWord.length(); i++) {
@@ -200,15 +203,17 @@ public class HangmanGame {
 						promptLabel.setText("strike " + count + ": ");
 					}
 					if (checkLoss(count)) {     								// if checkLoss is true, player has lost
-						 return;
+						resetMan();
+						promptLabel.setText("Nice try!");
 					}
 					//hangmanGraphics.repaint();
 					
-					//check win
-					if (theWord == wordLabel.getText()) {
-						promptLabel.setText("Nice Job!");
-						resetMan();
 					}
+				hangmanGraphics.repaint();
+				//check win
+				if (theWord.equals(wordLabel.getText())) {
+					resetMan();
+					promptLabel.setText("Nice Job!");
 				}
 			}
 		});
@@ -220,10 +225,6 @@ public class HangmanGame {
 		replayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resetMan();
-				promptLabel.setText("Enter a Letter");
-				wordPlacer();
-				newWord = wordPlacer2();
-				System.out.println("theWord: "  + theWord + "      newWord: " + newWord);
 			}
 		});
 		replayButton.setBounds(280, 213, 97, 25);
