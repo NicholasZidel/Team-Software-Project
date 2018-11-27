@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class HangmanGame {
@@ -38,6 +39,7 @@ public class HangmanGame {
 	static String replaceWord = "-";
 	private JFrame frame;
 	private MyGraphics panel;
+	private char[] letters = new char[] {'*','*','*','*','*','*'} ;
 
 	/**
 	 * Launch the application.
@@ -78,6 +80,11 @@ public class HangmanGame {
 		wordPlacer();
 		newWord = wordPlacer2();
 		submitAllow = false;
+		
+		for (int i = 0; i < 6; i++) {		//for used letters
+			letters[i] = '*';
+			usedLetters.setText(Arrays.toString(letters));
+		}
 	}
 	
 	public void wordPlacer() {
@@ -107,9 +114,9 @@ public class HangmanGame {
 	}
 	
 
-	static JLabel promptLabel, wordLabel;
+	static JLabel promptLabel, wordLabel, usedLetters, usedLettersLabel;
 	static JTextField txtLabel;
-	private static char letter;
+	private static char letter, letter2;
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Hangman");
@@ -142,15 +149,27 @@ public class HangmanGame {
 		promptLabel.setBounds(302, 59, 118, 35);
 		panel.add(promptLabel);
 		
-		txtLabel = new JTextField(" Input");
-		txtLabel.setBounds(302, 107, 75, 25);
-		panel.add(txtLabel);
-		
 		wordLabel = new JLabel("game word");
 		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		wordLabel.setFont(new Font("monospace", Font.PLAIN, 28));
 		wordLabel.setBounds(25, 175, 352, 35);
 		panel.add(wordLabel);
+		
+		usedLettersLabel = new JLabel("used letters");
+		usedLettersLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		usedLettersLabel.setBounds(302, 132, 100, 20);
+		usedLettersLabel.setForeground(Color.GREEN);
+		panel.add(usedLettersLabel);
+		
+		usedLetters = new JLabel(Arrays.toString(letters));
+		usedLetters.setHorizontalAlignment(SwingConstants.CENTER);
+		usedLetters.setBounds(302, 153, 100, 20);
+		usedLetters.setForeground(Color.GREEN);
+		panel.add(usedLetters);
+		
+		txtLabel = new JTextField(" Input");
+		txtLabel.setBounds(302, 107, 75, 25);
+		panel.add(txtLabel);
 		
 		JButton submit = new JButton(">");
 		submit.setBackground(Color.BLACK);
@@ -164,7 +183,8 @@ public class HangmanGame {
 					if (txtLabel.getText().equals("") || txtLabel.getText().equals(" "))
 						return;
 				letter = txtLabel.getText().charAt(0);
-				System.out.println("theWord1: " + theWord + "  newWord: " + newWord);
+				letter2 = txtLabel.getText().charAt(0);
+				//System.out.println("theWord1: " + theWord + "  newWord: " + newWord);
 				promptLabel.setText("Enter a Letter");
 				x = 0;
 				for (int i = 0; i < theWord.length(); i++) {
@@ -174,9 +194,18 @@ public class HangmanGame {
 					}
 				}
 				txtLabel.setText("");
-				System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
+				//System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
 				wordLabel.setText(newWord);
 				if(x == 0) {
+					for (int i = 0; i < 6; i++) {		//for used letters
+						if (letters[i] == letter2)
+							break;
+						if (letters[i] == '*') {
+							letters[i] = letter2;
+							usedLetters.setText(Arrays.toString(letters));
+							break;
+						}
+					}
 						count++;
 						//System.out.print("strike " + count + ": ");
 						if (count == 1) {
@@ -204,13 +233,15 @@ public class HangmanGame {
 							promptLabel.setText("strike " + count + ": ");
 						}
 						if (checkLoss(count)) {     								// if checkLoss is true, player has lost
-						promptLabel.setText("Nice try!");
+							promptLabel.setText("Nice try!");
+							submitAllow = false;
 						}
 				}
 				panel.repaint();
 				//check win
 				if (theWord.equals(wordLabel.getText())) {
 					promptLabel.setText("Nice Job!");
+					submitAllow = false;
 				}
 			  }
 			}
