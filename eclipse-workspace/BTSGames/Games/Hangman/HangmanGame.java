@@ -136,7 +136,7 @@ public class HangmanGame {
 		panel.setMinimumSize(new Dimension(400, 400));
 		panel.setFont(new Font("Sitka Text", Font.PLAIN, 25));
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setBackground(Color.MAGENTA);
+		panel.setBackground(Color.GRAY);
 		//frame.add(hangmanGraphics, BorderLayout.WEST); //add graphics for hangman
 		panel.setLayout(null);
 		
