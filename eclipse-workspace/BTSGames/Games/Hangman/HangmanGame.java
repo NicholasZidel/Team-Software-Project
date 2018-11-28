@@ -135,12 +135,14 @@ public class HangmanGame {
 			if (txtLabel.getText().equals("") || txtLabel.getText().equals(" "))
 				return;
 		letter = txtLabel.getText().charAt(0);
+		letter = Character.toLowerCase(letter); //change
 		letter2 = txtLabel.getText().charAt(0);
+		letter2 = Character.toLowerCase(letter2); 
 		//System.out.println("theWord1: " + theWord + "  newWord: " + newWord);
 		promptLabel.setText("Enter a Letter");
 		x = 0;
 		for (int i = 0; i < theWord.length(); i++) {
-			if (letter == (theWord.charAt(i))) {
+			if (letter == (theWord.charAt(i))) {     													//change
 				newWord = (newWord.substring(0,i) + letter + newWord.substring(i + 1, newWord.length()));
 				x = 1;
 			}
@@ -190,7 +192,7 @@ public class HangmanGame {
 					promptLabel.setText("strike " + count + ": ");
 				}
 				if (checkLoss(count)) {     								// if checkLoss is true, player has lost
-					promptLabel.setText("Nice try!");
+					promptLabel.setText("The Word: " + theWord);
 					submitAllow = false;
 				}
 		}
