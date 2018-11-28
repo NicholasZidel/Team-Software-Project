@@ -192,7 +192,7 @@ public class HangmanGame {
 					promptLabel.setText("strike " + count + ": ");
 				}
 				if (checkLoss(count)) {     								// if checkLoss is true, player has lost
-					promptLabel.setText("The Word: " + theWord);
+					promptLabel.setText("Word: " + theWord);
 					submitAllow = false;
 				}
 		}
