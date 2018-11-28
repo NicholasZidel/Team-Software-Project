@@ -42,7 +42,7 @@ public class MSGame {
 	 */
 	public MSGame() {
 		field = new ArrayList<ArrayList<Tile>>();
-		build();
+		buildField();
 		initialize();
 	}
 
@@ -106,13 +106,18 @@ public class MSGame {
 		JButton btnDig = new JButton("Dig");
 		southBar.add(btnDig);
 		
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				board.add(field.get(j).get(i).getButton());
+			}
+		}
 	}
 	
 	private static boolean getRandomBoolean() {
 	       return Math.random() < 0.5;
 	   }
 	
-	private void build () {
+	private void buildField() {
 		int bombCount = 0;
 		boolean temp;
 		
@@ -142,42 +147,109 @@ public class MSGame {
 				//checks condition for adding NW
 				if (i != 0 && j != 0) {
 					field.get(i).get(j).setNorthWest(field.get(i-1).get(j-1));
+					checkNearbyBomb("NW", i, j);
 				}
 				//checks condition for adding N
 				if (j != 0) {
 					field.get(i).get(j).setNorth(field.get(i).get(j-1));
+					checkNearbyBomb("N", i, j);
 				}
 				//checks condition for adding NE
-				if (i != 10 && j != 0) {
+				if (i != 9 && j != 0) {
 					field.get(i).get(j).setNorthEast(field.get(i+1).get(j-1));
+					checkNearbyBomb("NE", i, j);
 				}
 				//checks condition for adding E
-				if (i != 10) {
+				if (i != 9) {
 					field.get(i).get(j).setEast(field.get(i+1).get(j));
+					checkNearbyBomb("E", i, j);
 				}
 				//checks condition for adding SE
-				if (i != 10 && j != 10) {
+				if (i != 9 && j != 9) {
 					field.get(i).get(j).setSouthEast(field.get(i+1).get(j+1));
+					checkNearbyBomb("SE", i, j);
 				}
 				//checks condition for adding S
-				if (j != 10) {
+				if (j != 9) {
 					field.get(i).get(j).setSouth(field.get(i).get(j+1));
+					checkNearbyBomb("S", i, j);
 				}
 				//checks condition for adding SW
-				if (i != 0 && j != 10) {
+				if (i != 0 && j != 9) {
 					field.get(i).get(j).setSouthWest(field.get(i-1).get(j+1));
+					checkNearbyBomb("SW", i, j);
 				}
 				//checks condition for adding W
 				if (i != 0) {
 					field.get(i).get(j).setWest(field.get(i-1).get(j));
+					checkNearbyBomb("W", i, j);
 				}
 			}
 		}
 	}
 	
-	private void checkNearbyBomb() {
-		//used during addReferences to change the number of a tile according to number
-		//of nearby bombs
+	private void checkNearbyBomb(String direction, int xcoord, int ycoord) {
+		int type = field.get(xcoord).get(ycoord).getType();
+		//stops if checked tile is bomb
+		if (type == 9) {
+			return;
+		}
+		//checks if NW is bomb
+		if (direction.equals("NW")) {
+			if (field.get(xcoord).get(ycoord).getNorthWest().getType() == 9 ) {
+				field.get(xcoord).get(ycoord).setType(type + 1);
+			}
+			return;
+		}
+		//checks if N is bomb
+			if (direction.equals("N")) {
+				if (field.get(xcoord).get(ycoord).getNorth().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
+			//checks if NE is bomb
+			if (direction.equals("NE")) {
+				if (field.get(xcoord).get(ycoord).getNorthEast().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
+			//checks if E is bomb
+			if (direction.equals("E")) {
+				if (field.get(xcoord).get(ycoord).getEast().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
+			//checks if SE is bomb
+			if (direction.equals("SE")) {
+				if (field.get(xcoord).get(ycoord).getSouthEast().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
+			//checks if S is bomb
+			if (direction.equals("S")) {
+				if (field.get(xcoord).get(ycoord).getSouth().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
+			//checks if SW is bomb
+			if (direction.equals("SW")) {
+				if (field.get(xcoord).get(ycoord).getSouthWest().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
+			//checks if W is bomb
+			if (direction.equals("W")) {
+				if (field.get(xcoord).get(ycoord).getWest().getType() == 9 ) {
+					field.get(xcoord).get(ycoord).setType(type + 1);
+				}
+				return;
+			}
 	}
 
 }
