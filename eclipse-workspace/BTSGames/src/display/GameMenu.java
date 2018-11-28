@@ -95,7 +95,7 @@ public class GameMenu extends JPanel{
 				
 				if (hm == null) {
 					hm = new HangmanGame();
-					hm.createHangman();							//runs tictactoe game
+					hm.createHangman();							//runs hangman game
 				}
 
 			}
