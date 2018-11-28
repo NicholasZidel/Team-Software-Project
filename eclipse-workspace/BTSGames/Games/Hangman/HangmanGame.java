@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class HangmanGame {
@@ -44,7 +43,8 @@ public class HangmanGame {
 	static String replaceWord = "-";
 	private JFrame frame;
 	private static MyGraphics panel;
-	private static char[] letters = new char[] {'*','*','*','*','*','*'} ;
+	private static char[] letters = new char[ ] {' ', ' ', ' ', ' ', ' ', ' ', ' '} ;
+	private static String list = "";
 
 	/**
 	 * Launch the application.
@@ -70,6 +70,13 @@ public class HangmanGame {
 		initialize();
 	}
 	
+	public static String toString(char[] l) {
+		list = "";
+		for (int i = 0; i < l.length; i++) {
+			list = list + " " + l[i];
+		}
+		return list;
+	}
 	public void resetMan() {
 		head = false;
 		body = false;
@@ -77,19 +84,22 @@ public class HangmanGame {
 		Larm = false;
 		Rleg = false;
 		Lleg = false;
+		face = false;
 		txtLabel.setText("");
 		newWord = "";
+		list = "";
 		replaceWord = "-";
 		count = 0;
 		promptLabel.setText("Enter a Letter");
 		wordPlacer();
 		newWord = wordPlacer2();
 		submitAllow = false;
-		
-		for (int i = 0; i < 6; i++) {		//for used letters
-			letters[i] = '*';
-			usedLetters.setText(Arrays.toString(letters));
+		//for used letters
+		for (int i = 0; i < 7; i++) {
+			letters[i] = ' ';
 		}
+		//usedLetters.setText(toString(letters));
+		usedLetters.setText(toString(letters));
 	}
 	
 	public void wordPlacer() {
@@ -113,12 +123,13 @@ public class HangmanGame {
 	
 	private static boolean checkLoss(int c) {
 		boolean loss = false;
-		if (c >= 6 )
+		if (c >= 7 )
 			loss = true;
 		return loss;
 	}
 	
 	private static void run() {
+	
 		if (submitAllow == true) {	
 			if (txtLabel.getText().equals("") || txtLabel.getText().equals(" "))
 				return;
@@ -137,12 +148,13 @@ public class HangmanGame {
 		//System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
 		wordLabel.setText(newWord);
 		if(x == 0) {
-			for (int i = 0; i < 6; i++) {		//for used letters
+			for (int i = 0; i < 7; i++) {		//for used letters
 				if (letters[i] == letter2)
 					break;
-				if (letters[i] == '*') {
+				if (letters[i] == ' ') {
 					letters[i] = letter2;
-					usedLetters.setText(Arrays.toString(letters));
+					usedLetters.setText("");
+					usedLetters.setText(toString(letters));
 					break;
 				}
 			}
@@ -170,6 +182,10 @@ public class HangmanGame {
 				}
 				if (count == 6) {
 					Rleg = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (count == 7) {
+					face = true;
 					promptLabel.setText("strike " + count + ": ");
 				}
 				if (checkLoss(count)) {     								// if checkLoss is true, player has lost
@@ -208,7 +224,7 @@ public class HangmanGame {
 		panel.setMinimumSize(new Dimension(400, 400));
 		panel.setFont(new Font("Sitka Text", Font.PLAIN, 25));
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(Color.lightGray);
 		//frame.add(hangmanGraphics, BorderLayout.WEST); //add graphics for hangman
 		panel.setLayout(null);
 		
@@ -230,13 +246,13 @@ public class HangmanGame {
 		usedLettersLabel = new JLabel("used letters");
 		usedLettersLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		usedLettersLabel.setBounds(302, 132, 100, 20);
-		usedLettersLabel.setForeground(Color.GREEN);
+		usedLettersLabel.setForeground(Color.magenta);
 		panel.add(usedLettersLabel);
 		
-		usedLetters = new JLabel(Arrays.toString(letters));
+		usedLetters = new JLabel("-");
 		usedLetters.setHorizontalAlignment(SwingConstants.CENTER);
 		usedLetters.setBounds(302, 153, 100, 20);
-		usedLetters.setForeground(Color.GREEN);
+		usedLetters.setForeground(Color.BLACK);
 		panel.add(usedLetters);
 		
 		txtLabel = new JTextField(" Input");
@@ -285,6 +301,7 @@ public class HangmanGame {
 	public static boolean Larm;
 	public static boolean Rleg;
 	public static boolean Lleg;		
+	public static boolean face;	
 	MyGraphics hangmanGraphics = new MyGraphics();
 	
     public class MyGraphics extends JPanel{
@@ -313,6 +330,11 @@ public class HangmanGame {
     			g2d.drawLine(140, 112, 150, 135 );		//right leg
     		if (Lleg)
     			g2d.drawLine(140, 112, 130, 135 );		// left leg
+    		if (face) {
+    			g2d.drawLine(136, 73, 144, 73 );		// mouth
+    		    g2d.fillOval(144, 66, 2, 2);			// right eye
+    			g2d.fillOval(135, 66, 2, 2);		// left eye
+    		}
         }
     }
     
