@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import display.GameMenu;
 import javax.swing.JTextField;
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -22,10 +23,14 @@ import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class HangmanGame {
-
+	
 	static String[] words = {"awkward", "bagpipes", "banjo", "bungler",  "croquet", "crypt", "dwarves", 
 			"fishhook", "fjord", "gazebo", "gypsy", "haiku", "haphazard", "hyphen", "ivory", "jazzy", "jiffy", "ostracize", 
-			"oxygen", "pajama", "yacht", 
+			"oxygen", "pajama", "yacht", "colossal", "attach", "irate", "print", "degree", "outgoing",
+			"giants", "big", "passenger", "screeching", "look",
+			"driving", "route", "fearless",  "knot", "haunt", "lying", "playground", "breakable", "account", "discover", 
+			"imaginary", "skip", "smoke", "clip", "marry", "honorable", "celery", "unarmed",
+			"whimsical", "vague", "frail", "omniscient", "clever", "rake", "bump", "barbarous", "sheep",
 			"understand","computer","java", "jake", "amount", "hangman",
 			"destroy","caterpillar","specific","why","goat","quantum","juno","sacrifice",
 			"lemonade","theatre","rocket","faucet","contemporary","loser","college","amphitheatre",
@@ -38,8 +43,8 @@ public class HangmanGame {
 	static String  newWord = "";
 	static String replaceWord = "-";
 	private JFrame frame;
-	private MyGraphics panel;
-	private char[] letters = new char[] {'*','*','*','*','*','*'} ;
+	private static MyGraphics panel;
+	private static char[] letters = new char[] {'*','*','*','*','*','*'} ;
 
 	/**
 	 * Launch the application.
@@ -113,6 +118,73 @@ public class HangmanGame {
 		return loss;
 	}
 	
+	private static void run() {
+		if (submitAllow == true) {	
+			if (txtLabel.getText().equals("") || txtLabel.getText().equals(" "))
+				return;
+		letter = txtLabel.getText().charAt(0);
+		letter2 = txtLabel.getText().charAt(0);
+		//System.out.println("theWord1: " + theWord + "  newWord: " + newWord);
+		promptLabel.setText("Enter a Letter");
+		x = 0;
+		for (int i = 0; i < theWord.length(); i++) {
+			if (letter == (theWord.charAt(i))) {
+				newWord = (newWord.substring(0,i) + letter + newWord.substring(i + 1, newWord.length()));
+				x = 1;
+			}
+		}
+		txtLabel.setText("");
+		//System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
+		wordLabel.setText(newWord);
+		if(x == 0) {
+			for (int i = 0; i < 6; i++) {		//for used letters
+				if (letters[i] == letter2)
+					break;
+				if (letters[i] == '*') {
+					letters[i] = letter2;
+					usedLetters.setText(Arrays.toString(letters));
+					break;
+				}
+			}
+				count++;
+				//System.out.print("strike " + count + ": ");
+				if (count == 1) {
+					head = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (count == 2) {
+				body = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (count == 3) {
+					Larm = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (count == 4) {
+					Rarm = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (count == 5) {
+					Lleg = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (count == 6) {
+					Rleg = true;
+					promptLabel.setText("strike " + count + ": ");
+				}
+				if (checkLoss(count)) {     								// if checkLoss is true, player has lost
+					promptLabel.setText("Nice try!");
+					submitAllow = false;
+				}
+		}
+		panel.repaint();
+		//check win
+		if (theWord.equals(wordLabel.getText())) {
+			promptLabel.setText("Nice Job!");
+			submitAllow = false;
+		}
+	  }
+	}
 
 	static JLabel promptLabel, wordLabel, usedLetters, usedLettersLabel;
 	static JTextField txtLabel;
@@ -169,6 +241,11 @@ public class HangmanGame {
 		
 		txtLabel = new JTextField(" Input");
 		txtLabel.setBounds(302, 107, 75, 25);
+		txtLabel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				run();
+			}
+		});
 		panel.add(txtLabel);
 		
 		JButton submit = new JButton(">");
@@ -179,71 +256,7 @@ public class HangmanGame {
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (submitAllow == true) {	
-					if (txtLabel.getText().equals("") || txtLabel.getText().equals(" "))
-						return;
-				letter = txtLabel.getText().charAt(0);
-				letter2 = txtLabel.getText().charAt(0);
-				//System.out.println("theWord1: " + theWord + "  newWord: " + newWord);
-				promptLabel.setText("Enter a Letter");
-				x = 0;
-				for (int i = 0; i < theWord.length(); i++) {
-					if (letter == (theWord.charAt(i))) {
-						newWord = (newWord.substring(0,i) + letter + newWord.substring(i + 1, newWord.length()));
-						x = 1;
-					}
-				}
-				txtLabel.setText("");
-				//System.out.println("theWord2: " + theWord + "   newWord: " + newWord);
-				wordLabel.setText(newWord);
-				if(x == 0) {
-					for (int i = 0; i < 6; i++) {		//for used letters
-						if (letters[i] == letter2)
-							break;
-						if (letters[i] == '*') {
-							letters[i] = letter2;
-							usedLetters.setText(Arrays.toString(letters));
-							break;
-						}
-					}
-						count++;
-						//System.out.print("strike " + count + ": ");
-						if (count == 1) {
-							head = true;
-							promptLabel.setText("strike " + count + ": ");
-						}
-						if (count == 2) {
-						body = true;
-							promptLabel.setText("strike " + count + ": ");
-						}
-						if (count == 3) {
-							Larm = true;
-							promptLabel.setText("strike " + count + ": ");
-						}
-						if (count == 4) {
-							Rarm = true;
-							promptLabel.setText("strike " + count + ": ");
-						}
-						if (count == 5) {
-							Lleg = true;
-							promptLabel.setText("strike " + count + ": ");
-						}
-						if (count == 6) {
-							Rleg = true;
-							promptLabel.setText("strike " + count + ": ");
-						}
-						if (checkLoss(count)) {     								// if checkLoss is true, player has lost
-							promptLabel.setText("Nice try!");
-							submitAllow = false;
-						}
-				}
-				panel.repaint();
-				//check win
-				if (theWord.equals(wordLabel.getText())) {
-					promptLabel.setText("Nice Job!");
-					submitAllow = false;
-				}
-			  }
+				run();
 			}
 		});
 		panel.add(submit);
@@ -261,6 +274,7 @@ public class HangmanGame {
 		replayButton.setBounds(280, 213, 130, 25);
 		panel.add(replayButton);
 	}
+	
 	
 	//-----------------------------------------------------------------------------------------
 	//Graphics for hangman
@@ -303,3 +317,4 @@ public class HangmanGame {
     }
     
 }
+
