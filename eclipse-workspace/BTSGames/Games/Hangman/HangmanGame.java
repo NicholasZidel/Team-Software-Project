@@ -39,7 +39,7 @@ public class HangmanGame {
 	static int len = words.length;
 	static String  theWord;
 	static boolean submitAllow = false;
-	static String  newWord = "";
+	public static String  newWord = "";
 	static String replaceWord = "-";
 	private JFrame frame;
 	private static MyGraphics panel;
@@ -77,6 +77,8 @@ public class HangmanGame {
 		}
 		return list;
 	}
+	
+	//reset properties
 	public void resetMan() {
 		head = false;
 		body = false;
@@ -91,14 +93,13 @@ public class HangmanGame {
 		replaceWord = "-";
 		count = 0;
 		promptLabel.setText("Enter a Letter");
-		wordPlacer();
-		newWord = wordPlacer2();
+		wordPlacer(); 				//sets the label to be dashes
+		newWord = wordPlacer2(); 	//sets new word to be dashes
 		submitAllow = false;
 		//for used letters
 		for (int i = 0; i < 7; i++) {
 			letters[i] = ' ';
 		}
-		//usedLetters.setText(toString(letters));
 		usedLetters.setText(toString(letters));
 	}
 	
@@ -202,7 +203,12 @@ public class HangmanGame {
 	  }
 	}
 
-	static JLabel promptLabel, wordLabel, usedLetters, usedLettersLabel;
+	JButton replayButton;
+	JButton submit;
+	static JLabel promptLabel;
+	public static JLabel wordLabel;
+	static JLabel usedLetters;
+	static JLabel usedLettersLabel;
 	static JTextField txtLabel;
 	private static char letter, letter2;
 	private void initialize() {
@@ -264,7 +270,7 @@ public class HangmanGame {
 		});
 		panel.add(txtLabel);
 		
-		JButton submit = new JButton(">");
+		submit = new JButton(">");
 		submit.setBackground(Color.BLACK);
 		submit.setForeground(Color.MAGENTA);
 		submit.setBounds(377, 107, 40, 25);
@@ -277,7 +283,7 @@ public class HangmanGame {
 		});
 		panel.add(submit);
 		
-		JButton replayButton = new JButton("Play [reset]");
+		replayButton = new JButton("Play [reset]");
 		replayButton.setBackground(Color.BLACK);
 		replayButton.setForeground(Color.MAGENTA);
 		replayButton.addActionListener(new ActionListener() {
@@ -337,6 +343,15 @@ public class HangmanGame {
     		}
         }
     }
+    
+    //Button pressing for tests
+	public void replaypress() {
+		replayButton.doClick();
+	}
+	public void sumbitpress() {
+		submit.doClick();
+	}
+	
     
 }
 
