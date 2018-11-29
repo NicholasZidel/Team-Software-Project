@@ -19,24 +19,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 public class HangmanGame {
-	
-	static String[] words = {"awkward", "bagpipes", "banjo", "bungler",  "croquet", "crypt", "dwarves", 
-			"fishhook", "fjord", "gazebo", "gypsy", "haiku", "haphazard", "hyphen", "ivory", "jazzy", "jiffy", "ostracize", 
-			"oxygen", "pajama", "yacht", "colossal", "attach", "irate", "print", "degree", "outgoing",
-			"giants", "big", "passenger", "screeching", "look",
-			"driving", "route", "fearless",  "knot", "haunt", "lying", "playground", "breakable", "account", "discover", 
-			"imaginary", "skip", "smoke", "clip", "marry", "honorable", "celery", "unarmed",
-			"whimsical", "vague", "frail", "omniscient", "clever", "rake", "bump", "barbarous", "sheep",
-			"understand","computer","java", "jake", "amount", "hangman",
-			"destroy","caterpillar","specific","why","goat","quantum","juno","sacrifice",
-			"lemonade","theatre","rocket","faucet","contemporary","loser","college","amphitheatre",
-			"sloth","magical","mistake","stratosphere"};
+
 	static int count = 0;
 	static int x = 0;
-	static int len = words.length;
 	static String  theWord;
 	static boolean submitAllow = false;
 	public static String  newWord = "";
@@ -79,7 +70,7 @@ public class HangmanGame {
 	}
 	
 	//reset properties
-	public void resetMan() {
+	public void resetMan() throws FileNotFoundException {
 		head = false;
 		body = false;
 		Rarm = false;
@@ -103,10 +94,16 @@ public class HangmanGame {
 		usedLetters.setText(toString(letters));
 	}
 	
-	public void wordPlacer() {
+	File file = new File("Wordsdoc.txt");
+	Scanner scan = new Scanner(System.in);
+	public void wordPlacer() throws FileNotFoundException {
 		String w = new String("");
-		int num = (int) (Math.random()*len); //picks a random word
-		theWord = words[num];
+		int num = (int) (Math.random()*13371); //picks a random word
+		scan = new Scanner(file);
+		for(int i = 0; i < num - 1; i++) {
+			scan.nextLine();
+		}
+		theWord = scan.nextLine();
 		for(int i = 0; i < theWord.length(); i++)
 		{
 			w = w + "-";
@@ -290,7 +287,12 @@ public class HangmanGame {
 		replayButton.setForeground(Color.MAGENTA);
 		replayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				resetMan();
+				try {
+					resetMan();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				panel.repaint();
 				submitAllow = true;
 			}
