@@ -1,12 +1,15 @@
 package Minesweeper;
 
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class Tile {
+public class Tile extends JButton {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int xcoord;
 	private int ycoord;
 	private int type;
@@ -17,9 +20,9 @@ public class Tile {
 	 * ...
 	 * 8 is 8 mines nearby
 	 * 9 is a mine
-	 * 10 is a wrong flag
-	 * 11 is a flagged mine
 	 */
+	private boolean isFlag;
+	private boolean isDug;
 	private Tile north;
 	private Tile south;
 	private Tile east;
@@ -28,18 +31,17 @@ public class Tile {
 	private Tile northWest;
 	private Tile southEast;
 	private Tile southWest;
-	private JButton button;
 	
 	public Tile(boolean isMine, int x, int y) {
-		button = new JButton();
-		button.setPreferredSize(new Dimension(30, 30));
 		if (isMine) {
-			type = 10;
+			type = 9;
 		} else {
 			type = 0;
 		}
 		xcoord = x;
 		ycoord = y;
+		isFlag = false;
+		isDug = false;
 	}
 //-------Getters----------------------------------------------------------------------------
 
@@ -51,10 +53,11 @@ public class Tile {
 	public Tile getNorthWest() {return northWest;}
 	public Tile getSouthEast() {return southEast;}
 	public Tile getSouthWest() {return southWest;}
-	public JButton getButton() {return button;}
 	public int getXCoord() {return xcoord;}
 	public int getYCoord() {return ycoord;}
 	public int getType() {return type;}
+	public boolean getIsFlag() {return isFlag;}
+	public boolean getIsDug() {return isDug;}
 	
 //--------Setters--------------------------------------------------------------------------
 	
@@ -67,10 +70,12 @@ public class Tile {
 	public void setSouthEast(Tile se) {southEast = se;}
 	public void setSouthWest(Tile sw) {southWest = sw;}
 	public void setType(int t) {type = t;}
+	public void setIsFlag(boolean foo) {isFlag = foo;}
+	public void setIsDug(boolean foo) {isDug = foo;}
 	
 //----------------------------------------------------------------------------------------
 	
 	public void setButtonListener(ActionListener a) {
-		button.addActionListener(a);
+		this.addActionListener(a);
 	}
 }
