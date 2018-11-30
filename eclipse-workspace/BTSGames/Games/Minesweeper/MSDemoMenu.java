@@ -23,7 +23,7 @@ import display.GameMenu;
 public class MSDemoMenu extends JPanel {
 
 	private static MSDemoMenu panel = null;
-	private static JButton btnPlay = null;
+	static JButton btnSweep = null;
 	
 	public static MSDemoMenu getInstance() {
 		
@@ -51,7 +51,7 @@ public class MSDemoMenu extends JPanel {
 		lblMinesweeper.setFont(new Font("Sitka Subheading", Font.BOLD, 27));
 		panel.add(lblMinesweeper);
 		
-		JButton btnSweep = new JButton("Sweep");
+		btnSweep = new JButton("Sweep");
 		btnSweep.setForeground(Color.BLACK);
 		btnSweep.setFont(new Font("Stencil", Font.PLAIN, 18));
 		btnSweep.addActionListener(new ActionListener() {
@@ -67,5 +67,9 @@ public class MSDemoMenu extends JPanel {
 		btnTutorial.setBackground(Color.ORANGE);
 		btnTutorial.setBounds(90, 200, 130, 29);
 		panel.add(btnTutorial);
+	}
+	
+	public void setSweepButton(ActionListener a) {
+		btnSweep.addActionListener(a);
 	}
 }

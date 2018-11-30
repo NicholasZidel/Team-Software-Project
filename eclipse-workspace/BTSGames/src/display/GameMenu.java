@@ -20,6 +20,7 @@ import Centipede.CDemoMenu;
 import Hangman.HMDemoMenu;
 import Hangman.HangmanGame;
 import Minesweeper.MSDemoMenu;
+import Minesweeper.MSGame;
 import TicTacToe.DemoMenu;
 import TicTacToe.DifficultyPanel;
 import TicTacToe.TTTTutorial;
@@ -56,6 +57,10 @@ public class GameMenu extends JPanel{
 	static HangmanGame hm = null;
 	public static void resetHM() {
 		hm = null;
+	}
+	static MSGame ms = null;
+	public static void resetMS() {
+		ms = null;
 	}
 	//-------------------------------------------------------------------
 	/**
@@ -125,6 +130,19 @@ public class GameMenu extends JPanel{
 				//TTTTutorial.main(null);
 			}
 		});
+		//--------------------------------------------------------------------------
+		MSM.setSweepButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (ms == null) {
+					ms = new MSGame();
+					ms.createFrame();							//runs Minesweeper game
+				}
+
+			}
+		});
+		
+		
 		//------------------------------------------------------------------------
 				
 		panel.add(btnReturn, BorderLayout.SOUTH);
