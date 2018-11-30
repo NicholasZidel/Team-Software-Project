@@ -17,6 +17,8 @@ public class Tile {
 	 * ...
 	 * 8 is 8 mines nearby
 	 * 9 is a mine
+	 * 10 is a wrong flag
+	 * 11 is a flagged mine
 	 */
 	private Tile north;
 	private Tile south;
