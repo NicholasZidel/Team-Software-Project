@@ -97,12 +97,13 @@ public class Driver {
 			public void actionPerformed(ActionEvent e) {
 				cl.show(frame.getContentPane(), "SM");
 				//need to display statistics
-				SM.displayData();
+				SM.displayData(currentUser);
 			}
 		});
 		
 		SM.setReturnButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SM.clear();
 				cl.show(frame.getContentPane(), "MM");
 			}
 		});

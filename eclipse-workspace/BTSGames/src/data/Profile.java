@@ -103,7 +103,11 @@ public class Profile {
 		}
 		
 		writeJSONFile();
+		
 		//update leaderboard...
+		LeaderBoard leaderBoard = new LeaderBoard();
+		leaderBoard.update(game, name, currentScore);
+		
 		return currentScore + 1;
 	}
 	
@@ -122,4 +126,5 @@ public class Profile {
 	public String getDirPath() {
 		return dirPath;
 	}
+	
 }

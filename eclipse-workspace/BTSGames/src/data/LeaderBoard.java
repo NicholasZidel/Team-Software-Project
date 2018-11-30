@@ -19,6 +19,7 @@ public class LeaderBoard {
 	private JSONObject jsonObject;
 	
 	public LeaderBoard() {
+		//actually want to load from profiles
 		if( !(new File(filePath).exists()) ) {
 			file = new File(filePath);
 			jsonObject = new JSONObject();
@@ -78,12 +79,27 @@ public class LeaderBoard {
 		
 	}
 	
-	
 	public String getJSONString() {
 		return jsonObject.toString();
 	}
 	
 	public JSONObject getJSONObject() {
 		return jsonObject;
+	}
+	
+	public int getScoreIndex() {
+		return scoreIndex;
+	}
+	
+	public int getNameIndex() {
+		return nameIndex;
+	}
+	
+	public String getScoreKey() {
+		return highScoreKey;
+	}
+	
+	public String getNameKey() {
+		return nameKey;
 	}
 }

@@ -36,6 +36,18 @@ public class Buffer {
 	public String readFile(File fileToRead) {
 		return "hello";
 	}
+
+	public JSONObject readFileJSONObject(String path) {
+		String jsonString = readFile(path);
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = new JSONObject(jsonString);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonObject;
+	}
 	
 	public String readFile(String path) {
 		//JSONObject jsonObject = new JSONObject();
@@ -49,6 +61,7 @@ public class Buffer {
 					jsonString += current;
 					current = reader.readLine();
 				}
+				reader.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -60,18 +73,6 @@ public class Buffer {
 			}*/
 		}
 		return jsonString;
-	}
-
-	public JSONObject readFileJSONObject(String path) {
-		String jsonString = readFile(path);
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject = new JSONObject(jsonString);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return jsonObject;
 	}
 }
 

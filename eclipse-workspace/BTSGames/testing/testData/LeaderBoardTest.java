@@ -32,6 +32,7 @@ class LeaderBoardTest {
 		board.update("Hangman", "BILL", 10);
 		board.update("Hangman", "Sara", 13);
 		board.update("Hangman", "Sara", 11);
+		board.update("TicTacToe", "John", 13);
 	}
 
 }

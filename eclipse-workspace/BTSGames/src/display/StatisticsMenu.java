@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import data.LeaderBoard;
+import data.Profile;
+
 public class StatisticsMenu extends JPanel {
 
 	public StatisticsMenu() {
@@ -20,10 +28,10 @@ public class StatisticsMenu extends JPanel {
 
 	private static StatisticsMenu menu = null;
 	
-	private static JTextField textField;
-	private static JTextField textField_1;
-	private static JTextField textField_2;
-	private static JTextField textField_3;
+	private static JLabel gameField;
+	private static JLabel highScoreField;
+	private static JLabel playerScoreField;
+	private static JLabel leaderBoardField;
 	private static JButton btnReturnButton = new JButton("Return");
 	
 	public static StatisticsMenu getInstance() {
@@ -58,22 +66,17 @@ public class StatisticsMenu extends JPanel {
 		
 		JLabel lblGame = new JLabel("Game");
 		lblGame.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblGame.setBounds(6, 50, 79, 27);
+		lblGame.setBounds(30, 50, 79, 30);
 		statsPanel.add(lblGame);
 		
 		JLabel lblPersonal = new JLabel("Player Score");
 		lblPersonal.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblPersonal.setBounds(70, 50, 100, 29);
+		lblPersonal.setBounds(130, 50, 100, 30);
 		statsPanel.add(lblPersonal);
-		
-		JLabel lblNewLabel_1 = new JLabel("High Score");
-		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_1.setBounds(173, 55, 90, 20);
-		statsPanel.add(lblNewLabel_1);
 		
 		JLabel lblLeaderboard = new JLabel("LeaderBoard");
 		lblLeaderboard.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblLeaderboard.setBounds(276, 58, 120, 16);
+		lblLeaderboard.setBounds(265, 50, 150, 30);
 		statsPanel.add(lblLeaderboard);
 		
 		btnReturnButton.setBounds(130, 350, 140, 35);
@@ -82,33 +85,82 @@ public class StatisticsMenu extends JPanel {
 		
 		//text fields that will be updated
 		//parse json file row by row
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(0, 77, 70, 261);
-		statsPanel.add(textField);
-		textField.setColumns(10);
+		gameField = new JLabel();
+		gameField.setBounds(30, 77, 90, 261);
+		statsPanel.add(gameField);
+		gameField.setHorizontalAlignment(SwingConstants.LEFT);
+		gameField.setVerticalAlignment(SwingConstants.TOP);
+		gameField.setForeground(Color.blue);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(70, 77, 100, 261);
-		statsPanel.add(textField_1);
-		textField_1.setColumns(10);
+		playerScoreField = new JLabel();
+		playerScoreField.setBounds(130, 77, 80, 261);
+		statsPanel.add(playerScoreField);
+		playerScoreField.setHorizontalAlignment(SwingConstants.LEFT);
+		playerScoreField.setVerticalAlignment(SwingConstants.TOP);
+		playerScoreField.setForeground(Color.blue);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setBounds(168, 77, 100, 261);
-		statsPanel.add(textField_2);
-		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setBounds(267, 77, 124, 261);
-		statsPanel.add(textField_3);
-		textField_3.setColumns(10);
+//		highScoreField = new JLabel();
+//		highScoreField.setBounds(168, 77, 100, 261);
+//		statsPanel.add(highScoreField);
+//		highScoreField.setHorizontalAlignment(SwingConstants.LEFT);
+//		highScoreField.setVerticalAlignment(SwingConstants.TOP);
+//		highScoreField.setForeground(Color.blue);
+		
+		leaderBoardField = new JLabel();
+		leaderBoardField.setBounds(265, 77, 224, 261);
+		statsPanel.add(leaderBoardField);
+		leaderBoardField.setHorizontalAlignment(SwingConstants.LEFT);
+		leaderBoardField.setVerticalAlignment(SwingConstants.TOP);
+		leaderBoardField.setForeground(Color.blue);
 	}
 	
-	public void displayData() {
-		//System.out.println("hello");
+	public int displayData( Profile player ) {
+		LeaderBoard board = new LeaderBoard();
+		JSONObject jsonObject = board.getJSONObject();
+		
+		//if jsonObject is empty there is nothing to do
+		if( jsonObject.length() == 0 ) {
+			return 0;
+		}
+		
+		//iterate through each key (game) then update that row.
+		Iterator<String> keys = jsonObject.keys();
+		
+		try {
+			while(keys.hasNext()) {
+				String key = keys.next();
+				JSONObject highScore = (JSONObject)((JSONArray)jsonObject.get(key)).get(board.getScoreIndex());
+				JSONObject leaderName = (JSONObject)((JSONArray)jsonObject.get(key)).get(board.getNameIndex());
+				//set values in leaderboard
+				System.out.println(gameField.getText()+key);
+				gameField.setText("<html>" + gameField.getText() + "<br/>" + key);
+				leaderBoardField.setText("<html>" + leaderBoardField.getText() + "<br/>" +
+							leaderName.get(board.getNameKey()) + " " + highScore.get(board.getScoreKey()));
+				
+				//need player score to match the game
+				JSONObject playerJson = player.getJSONObject();
+				if( playerJson.has(key)) {
+					playerScoreField.setText("<html>" + playerScoreField.getText() + "<br/>" + 
+														playerJson.get(key));
+				} else {
+					playerScoreField.setText("<html>" + playerScoreField.getText() + "<br/>" + 
+														"null");
+				}
+				
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 1;
+	}
+	
+	public void clear() {
+		gameField.setText("");
+		leaderBoardField.setText("");
+		playerScoreField.setText("");
 	}
 	
 	public void setReturnButton(ActionListener action) {
