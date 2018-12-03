@@ -456,5 +456,17 @@ public class MSGame {
 				return;
 			}
 	}
-
+	
+	//tester methods
+	public Tile getRandom() {
+		int i = (int) (Math.random() * 10);
+		int j = (int) (Math.random() * 10);
+		return field.get(i).get(j);
+	}
+	public Tile getTile(int i, int j) {
+		return field.get(i).get(j);
+	}
+	public int getDug() {
+		return dugCount;
+	}
 }
