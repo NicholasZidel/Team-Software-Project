@@ -34,5 +34,11 @@ class LeaderBoardTest {
 		board.update("Hangman", "Sara", 11);
 		board.update("TicTacToe", "John", 13);
 	}
+	
+	
+	@Test
+	void createLeaderBoard() {
+		LeaderBoard board = new LeaderBoard();
+	}
 
 }

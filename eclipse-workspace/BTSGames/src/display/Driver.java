@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import org.json.JSONObject;
 
 import data.Buffer;
+import data.LeaderBoard;
 import data.Profile;
 
 import javax.swing.JButton;
@@ -96,8 +97,11 @@ public class Driver {
 		MM.setStatisticsButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl.show(frame.getContentPane(), "SM");
+				//create leaderboard
+				LeaderBoard board = new LeaderBoard();
+				
 				//need to display statistics
-				SM.displayData(currentUser);
+				SM.displayData(currentUser, board);
 			}
 		});
 		

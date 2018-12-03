@@ -1,6 +1,7 @@
 package data;
 
 import java.io.File;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,19 +16,44 @@ public class LeaderBoard {
 	private Buffer buffer = new Buffer();
 	private static int scoreIndex = 0;
 	private static int nameIndex = 1;
+	private String profileLocation = "Output/Profiles/";
 	
 	private JSONObject jsonObject;
 	
 	public LeaderBoard() {
 		//actually want to load from profiles
-		if( !(new File(filePath).exists()) ) {
-			file = new File(filePath);
-			jsonObject = new JSONObject();
-		}
-		else {
-			jsonObject = getJSONObjectFromFile();
+		jsonObject = new JSONObject();
+		generateLeaderBoard();
+		buffer.writeFile(jsonObject.toString(), filePath);
+	}
+	
+	public void generateLeaderBoard() {
+		File[] files = new File(profileLocation).listFiles();
+		for( File file: files ) {
+			String fileName = file.getName();
+			
+			if( fileName.endsWith(".json") && fileName.substring(0,1) != "") {
+				//System.out.println(profileLocation + fileName);
+				//read in file to leaderboard
+				JSONObject currentProfile = buffer.readFileJSONObject("Output/Profiles/" + file.getName());
+				Iterator<String> keys = currentProfile.keys();
+				
+				try {
+					while(keys.hasNext()) {
+						String gameKey = keys.next();
+						if(!gameKey.equals("PlayerName"))
+							update(gameKey, fileName.substring(0, fileName.length() - 5), currentProfile.getInt(gameKey));
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
 		}
 	}
+	
 	/*
 	public LeaderBoard(JSONObject jsonObject) {
 		super();
@@ -72,11 +98,6 @@ public class LeaderBoard {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		buffer.writeFile(jsonObject.toString(), filePath);
-		
-		//need to trigger the statistics menu
-		//read the file
-		
 	}
 	
 	public String getJSONString() {

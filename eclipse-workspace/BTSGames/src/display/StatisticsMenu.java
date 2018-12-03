@@ -115,8 +115,9 @@ public class StatisticsMenu extends JPanel {
 		leaderBoardField.setForeground(Color.blue);
 	}
 	
-	public int displayData( Profile player ) {
-		LeaderBoard board = new LeaderBoard();
+	public int displayData( Profile player, LeaderBoard board ) {
+		//leaderboard needs to be updated from profiles
+		
 		JSONObject jsonObject = board.getJSONObject();
 		
 		//if jsonObject is empty there is nothing to do
