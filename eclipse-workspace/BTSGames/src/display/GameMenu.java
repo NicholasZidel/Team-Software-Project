@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import Centipede.CDemoMenu;
 import Hangman.HMDemoMenu;
+import Hangman.HMTutorial;
 import Hangman.HangmanGame;
 import Minesweeper.MSDemoMenu;
 import Minesweeper.MSGame;
@@ -94,6 +95,11 @@ public class GameMenu extends JPanel{
 		HMDemoMenu HMM = HMDemoMenu.getInstance();
 		cardPanel.add(HMM, "HMM");
 		
+		HMM.setTutorialButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					HMTutorial.main(null);
+			}
+		});
 		HMM.setPlayButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//DP.setVisible(true);
