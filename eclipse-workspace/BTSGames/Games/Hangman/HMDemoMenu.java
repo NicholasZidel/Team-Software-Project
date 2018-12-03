@@ -41,6 +41,7 @@ public class HMDemoMenu extends JPanel {
 	 * Initialize the contents of the frame.
 	 */
 	static JButton btnPlay;
+	static JButton btnTutorial;
 	private static void initialize() {
 
 		
@@ -61,7 +62,7 @@ public class HMDemoMenu extends JPanel {
 		btnPlay.setBounds(106, 144, 97, 25);
 		panel.add(btnPlay);
 		
-		JButton btnTutorial = new JButton("Tutorial");
+		btnTutorial = new JButton("Tutorial");
 		btnTutorial.setBackground(Color.BLACK);
 		btnTutorial.setForeground(Color.MAGENTA);
 		btnTutorial.setBounds(106, 182, 97, 25);
@@ -70,6 +71,9 @@ public class HMDemoMenu extends JPanel {
 	
 	public void setPlayButton(ActionListener a) {
 		btnPlay.addActionListener(a);
+	}
+	public void setTutorialButton(ActionListener a) {
+		btnTutorial.addActionListener(a);
 	}
 
 }
