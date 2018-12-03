@@ -127,7 +127,7 @@ public class GameMenu extends JPanel{
 		
 		DM.setTutorialButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TTTTutorial.main(null);
+				TTTTutorial.main(null);
 			}
 		});
 		//--------------------------------------------------------------------------

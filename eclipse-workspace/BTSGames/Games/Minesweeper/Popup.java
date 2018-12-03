@@ -17,18 +17,6 @@ public class Popup {
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Popup window = new Popup();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 	
 	public static void createPopup(int x) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,7 +45,7 @@ public class Popup {
 		frame = new JFrame();
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(new Color(165, 42, 42));
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		
 		JLabel Label = new JLabel();
@@ -67,8 +55,8 @@ public class Popup {
 		if (i == 1) {
 			Label.setText("You Win!");
 		}
-		Label.setForeground(Color.CYAN);
-		Label.setFont(new Font("Ravie", Font.PLAIN, 21));
+		Label.setForeground(Color.ORANGE);
+		Label.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		Label.setMinimumSize(new Dimension(150, 75));
 		panel.add(Label);
 		frame.setResizable(false);

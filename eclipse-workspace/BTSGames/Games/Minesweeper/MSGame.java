@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
+import display.Driver;
 import display.GameMenu;
 
 import java.awt.BorderLayout;
@@ -286,6 +287,7 @@ public class MSGame {
 	private void checkWin() {
 		if (dugCount == 90) {
 			Popup.createPopup(1);
+			Driver.currentUser.updateScore("Minesweeper");
 			for (int i = 0; i < 10; i++) {
 				for (int j = 0; j < 10; j++) {
 					if (field.get(i).get(j).getType() == 9) {
@@ -454,5 +456,17 @@ public class MSGame {
 				return;
 			}
 	}
-
+	
+	//tester methods
+	public Tile getRandom() {
+		int i = (int) (Math.random() * 10);
+		int j = (int) (Math.random() * 10);
+		return field.get(i).get(j);
+	}
+	public Tile getTile(int i, int j) {
+		return field.get(i).get(j);
+	}
+	public int getDug() {
+		return dugCount;
+	}
 }

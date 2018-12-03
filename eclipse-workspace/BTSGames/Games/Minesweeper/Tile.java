@@ -72,10 +72,4 @@ public class Tile extends JButton {
 	public void setType(int t) {type = t;}
 	public void setIsFlag(boolean foo) {isFlag = foo;}
 	public void setIsDug(boolean foo) {isDug = foo;}
-	
-//----------------------------------------------------------------------------------------
-	
-	public void setButtonListener(ActionListener a) {
-		this.addActionListener(a);
-	}
 }

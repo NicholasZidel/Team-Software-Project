@@ -125,10 +125,12 @@ public class LoginMenu extends JPanel {
 	
 	public void setLoginButton(ActionListener action) {
 		loginButton.addActionListener(action);
+		textField.addActionListener(action);
 	}
 	
 	public void setCreateButton(ActionListener action) {
 		createButton.addActionListener(action);
+		textField2.addActionListener(action);
 	}
 	
 	public void setSelectButtonText(String str) {

@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.SwingConstants;
+
+import display.Driver;
 import display.GameMenu;
 import javax.swing.JTextField;
 import java.awt.Dimension;
@@ -197,6 +199,7 @@ public class HangmanGame {
 		//check win
 		if (theWord.equals(wordLabel.getText())) {
 			promptLabel.setText("Nice Job!");
+			Driver.currentUser.updateScore("Hangman");
 			submitAllow = false;
 		}
 	  }
