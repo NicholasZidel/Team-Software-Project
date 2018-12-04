@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Component;
@@ -44,6 +46,8 @@ public class MainMenu extends JPanel {
 	private static void initialize() {
 		menu.setLayout(null);
 		menu.setBounds(0, 0, 400, 400);
+		menu.setBackground(Color.GRAY);
+		//menu.setForeground(Color.YELLOW);
 		
 		JLabel lblTitle = new JLabel("MAIN MENU");
 		lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -58,13 +62,19 @@ public class MainMenu extends JPanel {
 		menu.add(lblLoggedInAs);
 		
 		btnGameSelect.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnGameSelect.setBackground(Color.LIGHT_GRAY);
+		btnGameSelect.setForeground(Color.YELLOW);
 		btnGameSelect.setBounds(124, 125, 137, 29);
 		menu.add(btnGameSelect);
 		
 		btnStatistics.setBounds(124, 200, 137, 29);
+		btnStatistics.setBackground(Color.LIGHT_GRAY);
+		btnStatistics.setForeground(Color.YELLOW);
 		menu.add(btnStatistics);
 		
 		btnLogOut.setBounds(124, 275, 137, 29);
+		btnLogOut.setBackground(Color.LIGHT_GRAY);
+		btnLogOut.setForeground(Color.YELLOW);
 		menu.add(btnLogOut);
 	}
 	

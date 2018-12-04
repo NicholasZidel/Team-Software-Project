@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -72,9 +73,13 @@ public class GameMenu extends JPanel{
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JButton leftbutton = new JButton("<");
+		leftbutton.setBackground(Color.GRAY);
+		leftbutton.setForeground(Color.YELLOW);
 		panel.add(leftbutton, BorderLayout.WEST);
 		
 		JButton rightbutton = new JButton(">");
+		rightbutton.setBackground(Color.GRAY);
+		rightbutton.setForeground(Color.YELLOW);
 		panel.add(rightbutton, BorderLayout.EAST);
 		
 		CardLayout cl = new CardLayout();
@@ -150,8 +155,11 @@ public class GameMenu extends JPanel{
 		
 		
 		//------------------------------------------------------------------------
-				
+			
+		btnReturn.setBackground(Color.GRAY);
+		btnReturn.setForeground(Color.YELLOW);
 		panel.add(btnReturn, BorderLayout.SOUTH);
+
 		
 		leftbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
