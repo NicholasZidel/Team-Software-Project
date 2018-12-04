@@ -51,9 +51,10 @@ public class StatisticsMenu extends JPanel {
 	private static void Initialize() {
 		menu.setLayout(null);
 		menu.setBounds(0, 0, 400, 400);
-		
+		menu.setBackground(Color.LIGHT_GRAY);
 		JPanel statsPanel = new JPanel();
 		statsPanel.setBounds(3, 3, 400, 400);
+		statsPanel.setBackground(Color.LIGHT_GRAY);
 		statsPanel.setLayout(null);
 		menu.add(statsPanel);
 		
@@ -80,6 +81,8 @@ public class StatisticsMenu extends JPanel {
 		statsPanel.add(lblLeaderboard);
 		
 		btnReturnButton.setBounds(130, 350, 140, 35);
+		btnReturnButton.setBackground(Color.gray);
+		btnReturnButton.setForeground(Color.YELLOW);
 		statsPanel.add(btnReturnButton);
 		
 		
