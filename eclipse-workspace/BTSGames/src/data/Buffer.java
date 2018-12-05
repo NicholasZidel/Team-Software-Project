@@ -32,10 +32,6 @@ public class Buffer {
 		return true;
 		
 	}
-	
-	public String readFile(File fileToRead) {
-		return "hello";
-	}
 
 	public JSONObject readFileJSONObject(String path) {
 		String jsonString = readFile(path);

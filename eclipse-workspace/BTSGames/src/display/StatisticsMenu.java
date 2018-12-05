@@ -137,7 +137,6 @@ public class StatisticsMenu extends JPanel {
 				JSONObject highScore = (JSONObject)((JSONArray)jsonObject.get(key)).get(board.getScoreIndex());
 				JSONObject leaderName = (JSONObject)((JSONArray)jsonObject.get(key)).get(board.getNameIndex());
 				//set values in leaderboard
-				System.out.println(gameField.getText()+key);
 				gameField.setText("<html>" + gameField.getText() + "<br/>" + key);
 				leaderBoardField.setText("<html>" + leaderBoardField.getText() + "<br/>" +
 							leaderName.get(board.getNameKey()) + " " + highScore.get(board.getScoreKey()));
