@@ -66,8 +66,6 @@ public class Driver {
 		String profileName = LM.getProfileName();
 		String filePath = temp.getDirPath() + profileName + ".json";
 		
-		System.out.println(profileName);
-		
 		if( new File(filePath).exists() ) {
 			JSONObject jsonObject =  buffer.readFileJSONObject(filePath);
 			//create the instance using jsonObject 
@@ -147,7 +145,6 @@ public class Driver {
 	}
 	
 	private void loginButtonSetup() {
-		System.out.println("hello");
 		LM.setLoginButton(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (setProfileWhenSelectButtonClicked()) {
