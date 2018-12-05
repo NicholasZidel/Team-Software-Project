@@ -130,7 +130,7 @@ public class Driver {
 			}
 		});
 		
-		frame = new JFrame();
+		frame = new JFrame("BTS Games");
 		frame.setMinimumSize(new Dimension(406, 429));
 		frame.setMaximumSize(new Dimension(406, 429));
 		frame.setResizable(false);
