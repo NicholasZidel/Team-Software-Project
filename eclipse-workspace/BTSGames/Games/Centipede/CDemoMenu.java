@@ -3,6 +3,8 @@ package Centipede;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -49,6 +51,13 @@ public class CDemoMenu extends JPanel{
 		btnPlay.setBorder(null);
 		btnPlay.setBackground(Color.BLACK);
 		btnPlay.setBounds(80, 150, 150, 50);
+		
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CentipedeGame.createCentipede();
+			}
+		});
+		
 		instance.add(btnPlay);
 		
 		JButton btnTutorial = new JButton("Tutorial");
