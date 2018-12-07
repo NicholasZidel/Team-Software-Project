@@ -24,6 +24,7 @@ public class MSDemoMenu extends JPanel {
 
 	private static MSDemoMenu panel = null;
 	static JButton btnSweep = null;
+	static JButton btnTutorial = null;
 	
 	public static MSDemoMenu getInstance() {
 		
@@ -62,7 +63,7 @@ public class MSDemoMenu extends JPanel {
 		btnSweep.setBounds(90, 121, 130, 29);
 		panel.add(btnSweep);
 		
-		JButton btnTutorial = new JButton("Tutorial");
+		btnTutorial = new JButton("Tutorial");
 		btnTutorial.setFont(new Font("Stencil", Font.PLAIN, 18));
 		btnTutorial.setBackground(Color.ORANGE);
 		btnTutorial.setBounds(90, 200, 130, 29);
@@ -71,5 +72,9 @@ public class MSDemoMenu extends JPanel {
 	
 	public void setSweepButton(ActionListener a) {
 		btnSweep.addActionListener(a);
+	}
+	
+	public void setTutorialButton(ActionListener a) {
+		btnTutorial.addActionListener(a);
 	}
 }

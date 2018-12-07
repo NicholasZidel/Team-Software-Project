@@ -23,6 +23,7 @@ import Hangman.HMTutorial;
 import Hangman.HangmanGame;
 import Minesweeper.MSDemoMenu;
 import Minesweeper.MSGame;
+import Minesweeper.MSTutorial;
 import TicTacToe.DemoMenu;
 import TicTacToe.DifficultyPanel;
 import TicTacToe.TTTTutorial;
@@ -153,7 +154,11 @@ public class GameMenu extends JPanel{
 			}
 		});
 		
-		
+		MSM.setTutorialButton(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MSTutorial.main(null);
+			}
+		});
 		//------------------------------------------------------------------------
 			
 		btnReturn.setBackground(Color.GRAY);
