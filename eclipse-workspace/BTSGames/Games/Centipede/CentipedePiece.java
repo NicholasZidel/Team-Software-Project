@@ -31,6 +31,7 @@ public class CentipedePiece extends JPanel {
 	public void hit() {
 		dead = true;
 		data.updateShroomSpots(currentRow, currentCol, true);
+		data.scoreUp();
 		currentCol = -1;
 	}
 	

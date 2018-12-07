@@ -11,12 +11,12 @@ public class gameData {
 
 	private static gameData self = null;
 	private static JFrame frame;
-	JLabel score;
-	private CentipedePiece[] centipede = new CentipedePiece[10];
-	private Mushroom[][] mushrooms = new Mushroom[55][55];
-	private boolean[][] shroomSpots = new boolean[55][55];
-	private Ship player;
-	private Blaster laser;
+	private static JLabel score;
+	private static CentipedePiece[] centipede = new CentipedePiece[10];
+	private static Mushroom[][] mushrooms = new Mushroom[55][55];
+	private static boolean[][] shroomSpots = new boolean[55][55];
+	private static Ship player;
+	private static Blaster laser;
 	private GameClock clock = GameClock.initialize(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			for(CentipedePiece i : centipede) {
@@ -30,8 +30,7 @@ public class gameData {
 	});
 	
 	
-	private int playerScore = 0;
-	String formattedScore = String.format("%06d", playerScore);
+	private static int playerScore = 0;
 	
 	private gameData() {
 		createPlayer();
@@ -44,6 +43,8 @@ public class gameData {
 		if (self == null) {
 			self = new gameData();
 			frame = gameframe;
+			sendData();
+			addToFrame();
 			return self;
 		}
 		else {
@@ -58,8 +59,11 @@ public class gameData {
 	
 	public void scoreUp() {
 		playerScore += 100;
-		formattedScore = String.format("%06", playerScore);
-		score.setText(formattedScore);
+		score.setText(Integer.toString(playerScore));
+	}
+	
+	public int getScore() {
+		return playerScore;
 	}
 	
 	public Mushroom getMushrooms(int col, int row) {
@@ -154,7 +158,7 @@ public class gameData {
 	
 //	Adds everything to the frame
 	
-	public void addToFrame() {
+	public static void addToFrame() {
 		int i = 0;
 		for (CentipedePiece c : centipede) {
 			c.setBounds(i++ * 11 + 1, 1, 10, 10);
@@ -177,9 +181,24 @@ public class gameData {
 		laser.setBounds(laser.getCol() * 11  + 3, laser.getRow() * 11 + 1, 4, 10);
 		frame.getContentPane().add(laser);
 		
-		score = new JLabel(formattedScore);
+		score = new JLabel(Integer.toString(playerScore));
 		score.setBounds(400, 10, 100, 20);
 		score.setForeground(Color.WHITE);
 		frame.getContentPane().add(score);
+	}
+	
+	private static void sendData() {
+		for (CentipedePiece c : centipede) {
+			c.sendData(self);
+		}
+		for(Mushroom col[] : mushrooms) {
+			for (Mushroom mush : col) {
+				if (mush != null) {
+					mush.sendData(self);
+				}
+			}
+		}
+		laser.sendData(self);
+		player.sendData(self);
 	}
 }

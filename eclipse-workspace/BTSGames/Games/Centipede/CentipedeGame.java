@@ -59,23 +59,6 @@ public class CentipedeGame {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		data = gameData.getInstance(frame);
-		sendData();
-		data.addToFrame();
 		data.getClock().start();
-	}
-	
-	private void sendData() {
-		for (CentipedePiece c : data.getCentipede()) {
-			c.sendData(data);
-		}
-		for(Mushroom col[] : data.getMushrooms()) {
-			for (Mushroom mush : col) {
-				if (mush != null) {
-					mush.sendData(data);
-				}
-			}
-		}
-		data.getLaser().sendData(data);
-		data.getPlayer().sendData(data);
 	}
 }
