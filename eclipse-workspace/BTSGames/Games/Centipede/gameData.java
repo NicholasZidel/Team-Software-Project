@@ -60,6 +60,9 @@ public class gameData {
 	public void scoreUp() {
 		playerScore += 100;
 		score.setText(Integer.toString(playerScore));
+		if (playerScore % 1000 == 0) {
+			resetCentipede();
+		}
 	}
 	
 	public int getScore() {
@@ -187,6 +190,12 @@ public class gameData {
 		frame.getContentPane().add(score);
 	}
 	
+	
+//	--------------------------------------------------------------------
+	
+	
+//	sends the gameData to all of the classes that need to be able to access it.
+	
 	private static void sendData() {
 		for (CentipedePiece c : centipede) {
 			c.sendData(self);
@@ -200,5 +209,22 @@ public class gameData {
 		}
 		laser.sendData(self);
 		player.sendData(self);
+	}
+	
+//	--------------------------------------------------------------------
+	
+	
+//	resets the centipede
+	
+	private void resetCentipede() {
+		centipede = new CentipedePiece[10];
+		createCentipede();
+		int i = 0;
+		for (CentipedePiece c : centipede) {
+			c.sendData(self);
+			c.setBounds(i++ * 11 + 1, 1, 10, 10);
+			frame.getContentPane().add(c);
+			c.setVisible(true);
+		}
 	}
 }
